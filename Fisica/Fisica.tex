@@ -1,0 +1,437 @@
+\documentclass[8pt]{scrreprt}
+\usepackage[cm]{fullpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{cases}
+\usepackage{multicol}
+\usepackage{geometry}
+
+\pagestyle{empty}
+
+\newgeometry{left=1cm,bottom=1cm, right=1cm, top=1cm} %margini ridotti
+\begin{document}
+\begin{multicols*}{3}
+
+\section*{Cinematica}
+Corpo in caduta da fermo:\\
+$v = \sqrt{2gh}$\\
+$t = \sqrt{\frac{2g}{h}}$
+
+\vspace{-3mm}
+\subsection*{Proiettile}
+$y = x \tan \alpha - \frac{gx^2}{2v_0^2 \cos^2 \alpha}$\\
+$h_{max} = \frac{v_0^2 \sin^2 \alpha}{2g}$\\
+$x_{max} = \frac{v_0^2 \sin 2\alpha}{g}$\\
+$\theta = \tan^{-1} \left(-\frac{2hg}{v_0}\right)$\\
+$v_0 = \sqrt{\frac{dg}{\sin 2\alpha}}$
+
+\vspace{-3mm}
+\subsection*{Moto circolare}
+Velocità angolare: $\omega = \frac{d\alpha}{dt}$\\
+Accel. angolare: $\alpha = \frac{d\omega}{dt} = \frac{d^2\alpha}{dt^2}$
+
+\vspace{-3mm}
+\subsection*{Moto circolare uniforme}
+$\omega = \frac{2\pi}{T}$\\
+$v_{tang} = \omega r$\\
+$a_{centr} = \frac{v^2}{r} = \omega^2 r$\\
+$a_{tang} = \frac{dv}{dt}= \alpha R$
+
+\vspace{-3mm}
+\subsection*{Moto circolare unif. accel.}
+$\omega = \alpha t$\\
+$v = \omega r = \alpha r t$
+
+\vspace{-3mm}
+\subsection*{Moto curvilineo}
+$\overrightarrow{a} = a_T \hat{\theta} +a_R\hat{r} = \frac{d|\overrightarrow{v}|}{dt}\hat{\theta} - \frac{v^2}{r}\hat{r}$
+
+\vspace{-3mm}
+\subsection*{Sistemi a più corpi}
+$\overrightarrow{r}_{CM} = \sum_i \frac{m_i \overrightarrow{r}_i}{M} = \frac{1}{M} \int \overrightarrow{r} dm$\\
+$\overrightarrow{v}_{CM} = \frac{d\overrightarrow{r}_{CM}}{dt} = \frac{1}{M} \sum_i m_i \overrightarrow{v}_i = \frac{1}{M} \int \overrightarrow{v} dm$\\
+$\overrightarrow{a}_{CM} = \frac{d\overrightarrow{v}_{CM}}{dt} = \frac{1}{M} \sum_i m_i \overrightarrow{a}_i = \frac{1}{M} \int \overrightarrow{a} dm$\\
+Momento di inerzia:\\
+$I_{asse} = \sum_i m_i r_i^2 = \int r^2 dm$\\
+Teorema assi paralleli:\\
+$I_{asse} = I_{CM} + Md^2$
+
+\vspace{-3mm}
+\subsection*{Forze, lavoro, energia}
+Gravità: $\overrightarrow{F} = -\frac{GMm}{r^2}\hat{r}$\\
+Elastica: $\overrightarrow{F} = -k\overrightarrow{x}$\\
+\underline{Attrito:}\\
+Statico: $F_{max} = \mu_s N$\\
+Dinamico: $F = \mu_d N$\\
+\subsection*{Lavoro:}
+$L=\int_{x_i}^{x_f} \overrightarrow{F} \cdot d\overrightarrow{l}= \int_{\theta_i}^{\theta_f} \tau d \omega$\\
+Forza costante: $L = \overrightarrow{F} \cdot \overrightarrow{l}= Potenza \cdot\Delta t$\\
+Forza Elastica:\\
+$L=-\frac{1}{2} k x^2$\\
+Forza peso: $L = -mgh$\\
+Forza Gravità: $L = -\frac{GMm}{\Delta r}$
+
+\vspace{-3mm}
+\subsection*{Energia}
+Cinetica: $K = \frac{1}{2}mv^2$\\
+Rotazionale: $K = \left\{ \begin{array}{ll} \frac{1}{2}I\omega^2 & \text{asse} \\ \frac{1}{2}mv^2 + \frac{1}{2}I\omega^2 & \text{CM} \end{array} \right.$\\
+Forze vive: $K_f - K_i = L_{TOT}$\\
+Potenziale: $U = -L = -\int \overrightarrow{F} \cdot d\overrightarrow{l}$\\
+Meccanica: $E = K + U = \frac{1}{2}mv^2 + U$\\
+Conservazione: $E_f - E_i = L_{NC}$\\
+Potenziale Elastica: $U = \frac{1}{2}kx^2$
+
+\vspace{-3mm}
+\section*{Impulso e Momento angolare}
+Quantit\`a di moto: $\overrightarrow{p} = m\overrightarrow{v}$\\
+Impulso: $\overrightarrow{I} = \int \overrightarrow{F} dt = \Delta \overrightarrow{p}$\\
+Momento angolare: $\overrightarrow{L} = \overrightarrow{r} \times \overrightarrow{p}$\\
+Intorno ad asse fisso: $ |\overrightarrow{L}| = I \omega$
+
+\vspace{-3mm}
+\subsection*{Equazioni cardinali}
+$\overrightarrow{p}_T = \sum \overrightarrow{p}_i = m_{tot} \overrightarrow{v}_{CM}$\\
+$\overrightarrow{L}_T = \sum \overrightarrow{L}_i = I_{asse} \overrightarrow{\omega}$\\
+I card: $\sum \overrightarrow{F}_{est} = \frac{d\overrightarrow{p}_T}{dt} = m_{tot} \overrightarrow{a}_{CM}$\\
+II card: $\sum \overrightarrow{\tau}_{est} = \frac{d\overrightarrow{L}_T}{dt}$
+
+\vspace{-3mm}
+\subsection*{Urti}
+Elastico: conserva energia e qta moto\\
+Anelastico: conserva qta moto\\
+Compl. anelastico: corpi si uniscono\\
+Compl. anelastico: $v_f = \frac{m_1 v_1 + m_2 v_2}{m_1 + m_2}$ solo q\\
+Elastico:\\
+$\left\{ \begin{array}{ll} m_1 v_{1i} + m_2 v_{2i} = m_1 v_{1f} + m_2 v_{2f} \\ m_1 v_{1i}^2 + m_2 v_{2i}^2 = m_1 v_{1f}^2 + m_2 v_{2f}^2 \end{array} \right.$
+
+\vspace{-3mm}
+\subsection*{Moto armonico}
+$x(t) = A \cos(\omega t + \phi)$\\
+$v(t) = -\omega A \sin(\omega t + \phi)$\\
+$a(t) = -\omega^2 A \cos(\omega t + \phi) = -\omega^2 x(t)$\\
+$A = \sqrt{x_0^2 + \left(\frac{v_0}{\omega}\right)^2}$\\
+$\phi = \tan^{-1} \left(-\frac{v_0}{\omega x_0}\right)$\\
+$f = \frac{\omega}{2\pi}$ \quad $T = \frac{1}{f} = \frac{2\pi}{\omega}$\\
+Molla: $\omega = \sqrt{\frac{k}{m}}\leftarrow$ pulsazione\\
+Molle in parallelo: $k_{eq} = \sum_i k_i$\\
+Molle in serie: $\frac{1}{k_{eq}} = \sum_i \frac{1}{k_i}$\\
+Pendolo: $\omega = \sqrt{\frac{g}{l}}$
+
+\vspace{-3mm}
+\subsection*{Momenti di inerzia notevoli}
+Anello intorno ad asse: $I = MR^2$\\
+Cilindro pieno intorno ad asse: $I = \frac{1}{2}MR^2$\\
+Cilindro cavo intorno ad asse: $I = MR^2$\\
+Sbarra sottile, asse CM: $I = \frac{1}{12}ML^2$\\
+Sbarra sottile, asse perpendicolare estremo: $I = \frac{1}{3}ML^2$\\
+Sfera piena, asse CM: $I = \frac{2}{5}MR^2$\\
+Sfera cava, asse CM: $I = \frac{2}{3}MR^2$\\
+Lastra rettangolare, asse CM: $I = \frac{1}{12}M(a^2 + b^2)$
+
+\vspace{-3mm}
+\subsection*{Gravitazione}
+3° legge di Keplero: $T^2 = \frac{4\pi^2}{GM}R^3$\\
+Vel. fuga: $v = \sqrt{\frac{2GM}{R}}$\\
+Mom. angol.: $L = mvr$\\
+F. Gravitaz.: $F = \frac{GMm}{r^2}$\\
+Pot. gravitaz.: $U = -\frac{GMm}{r}$\\
+En. Mecc.: = $E_m = E_k + U = \frac{1}{2}mv^2 - \frac{GMm}{r}$\\
+En. Meccanica si conserva.\\
+Un punto materiale soggetto a forze centrali conserva anche momento angolare.\\
+Velocità per arrivare a orbita geostaz:\\
+$v = \sqrt{\frac{GM_T}{R_T}}$\\
+Velocità fuga:\\
+$v = \sqrt{\frac{2GM_T}{R_T}}$\\
+Orbita geostaz:\\
+$R_G = \sqrt[3]{\frac{GMT^2}{4\pi^2}}$ terra: $\sqrt[3]{\frac{gR_T^2T^2}{4\pi^2}}$ ca 36k km\\
+$T = 24h = 86400s$
+
+\vspace{-3mm}
+\subsection*{Fluidi}
+Spinta archimende: $B_A = \rho_L V g$\\
+Continuità: $A v = cost$\\
+Bernoulli: $P + \frac{1}{2}\rho v^2 + \rho g h = cost$\\
+$p(h) = p_0 + \rho g h$
+$\mathcal{V} = \pi r^2 v$
+
+\vspace{-3mm}
+\subsection*{Esercizi}
+Velocità minima giro completo FUNE:\\
+$v_{min} = \sqrt{5gL}$\\
+Velocità minima giro completo ASTA:\\
+$v_{min} = \sqrt{4gL}$\\
+Forza interazione tra due corpi:\\
+$F = \frac{m_2}{m_1 +m_2}F$\\
+Equilibrio corpo rigido:\\
+$\left\{ \begin{array}{ll} R_x = 0 \\ R_y = 0 \\ \mathcal{M}_{A_z} = 0 \end{array} \right.$
+
+\vspace{-3mm}
+\section*{Termodinamica}
+\vspace{-3mm}
+\subsection*{Primo principio}
+Calore e cap. termica: $Q = mc \Delta T$\\ %verifica todo
+Calore latente di trasf.: $L_t = \frac{Q}{m}$\\
+Lavoro \underline{sul} sistema: $dW = -PdV$\\
+En. interna: $dU = dQ - dW$\\
+Entropia: $\Delta S_{AB} = \int_A^B \frac{dQ_{REV}}{T}$
+
+\vspace{-3mm}
+\subsection*{Calore specifico}
+Per unità di massa $c = \frac{C}{m}$\\
+gas perfetto: $c_p - c_v = R$\\
+\textbf{Gas} \quad \textbf{\(c_V\)} \quad \textbf{\(c_p\)} \quad \ \ \textbf{\(\gamma\)} \\
+\textbf{Mo} \quad \(\frac{3}{2}R\) \quad \(\frac{5}{2}R\) \quad \(\frac{5}{3}\) \\
+\textbf{BI}  \quad \ \(\frac{5}{2}R\) \quad \(\frac{7}{2}R\) \quad \(\frac{7}{5}\) \\
+
+
+\vspace{-3mm}
+\subsection*{Gas perfetti}
+Eq. stato: $pV = nRT = NkT$\\
+Energia interna: $\Delta U = n c_V \Delta T$\\
+Entropia: $\Delta S = n c_V \ln \frac{T_f}{T_i} + nR \ln \frac{V_f}{V_i}$\\
+\underline{Isocora}:\\ $Q = \Delta U = n c_V \Delta T$ \quad $W = 0$\\
+$\Delta S = n c_V \ln \frac{T_f}{T_i} = n c_V \ln \frac{p_f}{p_i}$\\
+\underline{Isobara}:\\ $Q = n c_p \Delta T$ \quad $W = -p \Delta V$\\
+$\Delta S = n c_p \ln \frac{T_f}{T_i} = nc_p \ln \frac{V_f}{V_i}$\\
+\underline{Isoterma}:\\ $W = -Q = -nRT \ln \frac{V_f}{V_i}$\\
+$\Delta S = nR \ln \frac{V_f}{V_i} = nR \ln \frac{p_i}{p_f}$\\
+\underline{Adiabatica}:\\ $Q = 0$ \quad $p^{1-\gamma} T^\gamma = cost$\\
+$W = -\Delta U = \frac{1}{\gamma - 1}(p_f V_f - p_i V_i)$ \quad $\Delta S = 0$\\
+$pV^\gamma = cost$ \quad $TV^{\gamma - 1} = cost$
+
+\vspace{-3mm}
+\subsection*{Macchine termiche}
+Efficienza: $\eta = \frac{W}{Q_H} = 1 - \frac{Q_C^-}{Q_H^+}$\\
+Eff. Carnot: $\eta = 1 - \frac{T_C}{T_H}$\\
+Teorema di Carnot: $\eta \leq \eta_{REV}$\\
+C.O.P. frigorifero: $\epsilon = \frac{Q_C}{W}$\\
+C.O.P. pompa di calore: $\epsilon = \frac{Q_H}{W}$
+
+\vspace{-3mm}
+\subsection*{Espansione termica solidi}
+$\beta = 3\alpha$\\
+Lineare: $\Delta L= \alpha L_0 \Delta T$\\
+Volumetrica: $\Delta V = \beta V_0 \Delta T$
+
+\vspace{-3mm}
+\subsection*{Entropia}
+$\Delta S_u = \Delta S_s + \Delta S_g$\\
+$\Delta S = \frac{m \lambda}{T_0} + mc_G \ln \frac{T_f}{T_i}\leftarrow$ solido + liq\\
+$\Delta S = \frac{Q}{T} \leftarrow$ gas a T cost\\
+$\Delta S = \sum \frac{Q_i}{T_i} \leftarrow$ gas\\
+$\Delta S_U > 0$ irreversibile\\
+$\Delta S_U = 0$ reversibile\\
+
+\end{multicols*}
+\chapter*{Teoria}
+\begin{multicols*}{2}
+\begin{enumerate} 
+\item	ENUNCIARE I PRINCIPI DELLA TERMODINAMICA\\
+Un corpo, sul quale non agiscano forze o la cui risultante sia nulla, permane: \\
+In quiete sé già in quiete \\
+In uno stato di moto rettilineo uniforme se in movimento\\
+L’accelerazione di un corpo è direttamente proporzionale alla risultante delle forze a cui è sottoposto e inversamente proporzionale alla massa \\
+Se un corpo A applica una forza su un corpo B allora anche B applica una forza su A pari direzione e modulo ma verso opposto
+
+\item	DEFINIZIONE DI LAVORO\\
+Si consideri un punto materiale soggetto a una forza F che compie uno spostamento infinitesimo ds; si può definire il lavoro infinitesimo come: {}\\
+Il lavoro compiuto dalla forza F, lungo una curva $\gamma$, tra i punti AB si può esprimere come: $L_{AB}^\gamma = \int_{\gamma A}^{B} \vec{F} \cdot d\vec{s}$
+
+
+\item Teorema Energia cinetica\\
+Il lavoro compiuto dalla risultante delle forze che agisce su un punto è pari alla sua variazione di energia cinetica.\\	
+$dL = \vec{F} \cdot d\vec{s} = (F_T \hat{\mu}_T+ F_N \hat{\mu}_N) \cdot (ds\hat{\mu}_T) = F_T ds = mads = m \frac{dv}{dt}ds = mvdv$\\
+$L^\gamma_{AB} = \int_{A\gamma}^{B} mvdv = \frac{1}{2}mv^2_B - \frac{1}{2}mv^2_A = \Delta E_c$
+
+\item Forza conservativa\\
+Una forza si dice conservativa se:\\
+$\int_{\gamma_1A}^{B} \vec{F} \cdot d\vec{s} = \int_{\gamma_2A}^{B} \vec{F} \cdot d\vec{s} \quad \forall \gamma_1, \gamma_2 | \gamma_1 \neq  \gamma_2$
+
+\item DEFINIZIONE DI ENERGIA POTENZIALE\\
+Si definisce Energia Potenziale quella funzione di Stato tale che: $L_{AB}^\gamma = -\Delta E_P$\\
+È possibile introdurre l’energia potenziale solo per le forze conservative
+
+\item DEFINIZIONE DI FORZA CENTRALE A SIMMETRIA SFERICA\\
+Si definisce forza centrale a simmetria sferica una forza che, definita un’origine O e data la posizione R del punto materiale, ha modulo definito in funzione della distanza RO e direzione pari alla retta passante per O e R. {}
+
+\item Forza gravitazionale\\
+La forza gravitazionale è una forza centrale a simmetria sfeerica definita come:\\
+$\vec{F_G} = -\frac{GMm}{r^2}\hat{\mu_r}$\\
+$L_{AB}^\gamma = \int_{\gamma A}^{B} \vec{F_G} \cdot d\vec{r} = -\gamma m_1 m_2 \int_{\gamma A}^{B} \frac{1}{r^2} dr = \gamma m_1 m_2 \left(\frac{1}{r_B} - \frac{1}{r_A}\right)$\\
+Per definizione di energia potenziale:\\
+$L_{AB}^\gamma = - \gamma m_1 m_2 \left(- \frac{1}{r_B} + \frac{1}{r_A}\right)$\\
+$E_P = -\frac{GMm}{r} + cost$ (per convenzione c = 0 in quanto $E_P^G(\infty) = 0$)
+
+\item Energia potenziale forza Coloumb\\
+La forza di Coloumb è una forza centrale a simmetria sferica definita come:\\
+$\vec{F_C} = \frac{1}{4\pi \varepsilon_0} \frac{q_1 q_2}{r^2}\hat{\mu_r}$\\
+$L_{AB}^\gamma = \int_{\gamma A}^{B} \vec{F_C} \cdot d\vec{r} = \frac{q_1q_2}{h\pi\varepsilon_0} \int_{\gamma A}^{B} \frac{1}{r^2} dr = \frac{q_1q_2}{4\pi\varepsilon_0} \left(-\frac{1}{r_B} + \frac{1}{r_A}\right)$\\
+Per definizione di energia potenziale:\\
+$E_P = \frac{1}{4\pi\epsilon_0} \frac{q_1q_2}{r} + cost$
+
+\item Teorema conservazione energia meccanica\\
+$L = \Delta E_c = E_c^F - E_c^I$\\ Per t. forze vive\\
+$L = -\Delta U = E_P^I - E_P^F$\\ Per def energia potenziale\\
+$E_c^F -E_c^I = E_P^I - E_P^F$\\
+$E_c^F + E_P^F = E_c^I + E_P^I$\\
+$E_M^F = E_M^I$
+
+\item Conservazione momento angolare per un punto materiale soggetto a forza centrale\\
+Calcolo il momento della forza:\\
+$\vec{M}_o = \vec{F}_c \times \vec{r} = 0$\\
+Il momento è anche definito come:\\
+$\vec{M}_o = \frac{d\vec{L}}{dt}$\\
+Ciò implica che il momento angolare è costante.
+
+\item DIMOSTRARE CHE IL MOTO DI UNA PARTICELLA IN UN CAMPO DI FORZE CENTRALI È PIANO\\
+Trattandosi di forze centrali, il momento angolare si deve conservare.\\
+L=r x mv = k; per poter mantenere costante direzione e verso del prodotto vettoriale, il moto della particella non può cambiare piano (moto piano) né il senso di rotazione
+
+\item In un campo di forze centrali la velocità areolare si conserva\\
+$dA = \frac{1}{2}r (rd\theta) = \frac{1}{2}r^2 d\theta$\\ (area infinitesima)\\
+$\frac{dA}{dt} = \frac{1}{2}r^2 \frac{d\theta}{dt} = \frac{1}{2}r^2 \omega$ (velocità areolare)\\
+$\vec{L} = \vec{r} \times \vec{p} = mr^2 \omega$\\
+$\frac{dA}{dt} = \frac{L}{2m}$ Visto che $L$ è costante, la velocità areolare è costante.
+
+\item ENUNCIARE LE LEGGI DI KEPLERO\\
+	a) La terra compie un orbita ellittica di cui il sole è uno dei due fuochi\\
+	b) Il raggio vettore che unisce, virtualmente, sole e terra, spazia aree uguali in tempi uguali (velocità areolare costante)\\
+	c) I quadrati dei tempi che i pianeti impiegano a percorrere le loro orbite sono proporzionali al cubo del semiasse maggiore $\to$ $T^2 = \frac{4\pi^2}{GM}a^3$
+
+\item SIGNIFICATO FISICO DEL SEGNO DELL’ENERGIA MECCANICA DI UN CORPO SOGGETTO SOLAMENTE ALLA FORZA GRAVITAZIONALE \\
+Essendo soggetto a forze conservative si deve conservare l’energia meccanica: {}\\
+L’energia cinetica non può che essere sempre positiva; l’unico termine che può divenire negativo è l’energia potenziale gravitazionale.\\
+Se l’energia meccanica del corpo è positiva non è necessario che il corpo torni indietro, compiendo un’orbita chiusa, per mantenere il segno, cosa che accade in caso di energia meccanica negativa
+
+
+\item 1° e 2° eq. cardinale dinamica sistemi\\
+\begin{itemize}
+\item $\vec{F}^E = \frac{d\vec{p}}{dt}$\\
+Dimostrazione:\\
+In un sistema di N particelle, ogni particella risente di una forza:
+$\vec{F}_i = \vec{F}_i^E + \vec{F}_i^I$\\
+Considerando il sistema nel suo complesso, deve valere il 2° principio della dinamica:\\
+$\sum_{i=1}^N \vec{F}_i = \sum_{i=1}^N m_i \vec{a}_i$\\
+$\sum_{i=1}^N \vec{F}_i^E +\vec{F}_i^I = \sum_{i=1}^N m_i \vec{a}_i$\\
+Per il 3° principio della dinamica posso affermare:\\
+$\sum_{i=1}^N \vec{F}_i^I = 0$\\
+Quindi:
+$\sum_{i=1}^N \vec{F}_i^E = \sum_{i=1}^N m_i \vec{a}_i$\\
+$\vec{F}^E = \sum_{i=1}^N m_i \frac{d\vec{v}_i}{dt} = \frac{d\vec{p}}{dt}$
+
+\item $\frac{d\vec{L}_0}{dt} = -\vec{v}_i \times m_i \vec{v}_{CM} + \vec{M}^E$\\
+$\vec{L}_0 = \sum_{i=1}^N m_i \vec{r}_i \times \vec{v}_i$\\
+$\frac{d\vec{L}_0}{dt} = \sum_{i=1}^N (\frac{d\vec{r}_i'}{dt} \times m_i \vec{v}_i + \vec{r}_i \times \frac{d\vec{v}_1}{dt})$\\
+Tuttavia è noto che: $\vec{r}_i' = \vec{r}_i - \vec{r}_0$\\
+Quindi: $\frac{d\vec{L}_0}{dt} = - \vec{v}_0 \times M \vec{v}_{CM} +\vec{M}^E$
+\end{itemize}
+
+\item Teoremi centro di massa\\
+Definizione del luogo geometrico noto come centro di massa:\\
+$\vec{r}_{CM} = \frac{1}{M} \sum_{i=1}^N m_i \vec{r}_i$\\
+1° Teorema del centro di massa:\\
+$\vec{v}_{CM} = \frac{d\vec{r}_{CM}}{dt} = \frac{1}{M} \sum_{i=1}^N m_i \vec{v}_i = \frac{\vec{p}}{M}$\\
+2° Teorema del centro di massa:\\
+$\vec{a}_{CM} = \frac{\vec{F}^E}{M}$ \quad dove $\vec{F}^E$ è la risultante delle forze esterne\\
+
+
+\item T. di König\\
+$E_c = E_c^{CM} + E_c^I$ con $E_c^{CM}$ energia cinetica del centro di massa e $E_c^I$ energia cinetica del sistema rispetto al centro di massa\\
+Considero la velocità i-esima di una particella: $\vec{v}_i = \vec{v}_{CM} + \vec{v}_i'$, essa è esprimibile in funzione del sistema di riferimento del centro di massa:\\
+$E_c = \sum_{i=1}^{N} \frac{1}{2} v_i^2 = \sum_{i=1}^{N} \frac{1}{2} (v_{CM} + v_i')^2 m = \sum_{i=1}^{N} \frac{1}{2} v_{CM}^2 m+ \sum_{i=1}^{N} \frac{1}{2} v_i'^2 m+ \sum_{i=1}^{N} v_i' v_{CM} m$
+
+\item T. dell'Impulso\\
+Definito impulso di una forza $\vec{I} = \int_{t_1}^{t_2} \vec{F} dt$\\
+Il teorema dell'impulso afferma che:\\
+$\vec{I} = \Delta \vec{p}$\\
+Dimostrazione:\\
+$\vec{I} = \int_{t_1}^{t_2} \vec{F} dt = \int_{t_1}^{t_2} \frac{d\vec{p}}{dt} dt = \int_{t_1}^{t_2} d\vec{p} = \Delta \vec{p}$
+
+\item Urti\\
+a) urto elastico: urto nel quale si mantiene sia l’energia cinetica sia la quantità di moto\\
+B) urto anaelastico: urto nel quale si conserva solo la quantità di moto \\
+c) urto completamente anaelastico: caso particolare di urto anaelastico dove i corpi rimangono “attaccati” dopo l’urto e si ha la massima perdita di energia cinetica
+
+\item DIMOSTRAZIONE IN UN URTO COMPLETAMENTE ANAELASTICO SI HA LA MASSIMA PERDITA DI ENERGIA CINETICA\\
+Per il teorema di Koning sull’energia cinetica:\\$E_c = E_c' + \frac{1}{2} M v_{CM}^2$\\
+Negli urti anaelastici si conserva la quantità di moto, per il 1° teorema del centro di massa:\\
+$\vec{p} = + M \vec{v}_{CM} = cost \rightarrow \vec{v_{CM}} = cost$\\
+Ne consegue che l’unico modo che l’energia cinetica ha le variare è che $E_c' \to 0$ ; si ha dunque la massima perdita di energia cinetica
+
+\item ENUNCIARE IL PRIMO PRINCIPIO DELLA TERMODINAMICA\\
+La variazione di energia interna di un sistema è pari alla differenza tra calore scambiato e lavoro compiuto $\Delta U = Q - L$
+
+\item DEFINISCI CALORE MOLARE\\
+Si definisce calore molare il rapporto tra la capacità termica e il numero di moli di un sistema\\
+$C_m = \frac{1}{n} \frac{dQ}{dT}$
+
+\item DEFINISCI IL RENDIMENTO DI UNA MACCHINA TERMICA \\
+Si definisce rendimento di una macchina termica il rapporto tra il lavoro compiuto dalla macchina ed il calore da essa assorbito $\eta = \frac{L}{Q_H}$
+
+\item ENUNCIATI, E DIMOSTRAZIONE DELLA LORO EQUIVALENZA, DEL SECONDO PRINCIPIO DELLA TERMODINAMICA \\
+a) ENUNCIATO DI CLAUSIUS\\
+è impossibile realizzare una qualsiasi trasformazione che abbia come unico risultato il passaggio di calore da un corpo freddo ad un corpo caldo\\
+b) ENUNCIATO DI KELVIN PLANK\\
+è impossibile realizzare una qualsiasi trasformazione che abbia come risultato quello di convertire completamente in lavoro il calore prelevato da un solo termostato
+
+\item ENUNCIARE E DIMOSTRARE IL TEOREMA DI CARNOT\\
+a) tra le macchine termiche cicliche che operano tra due temperature ben definite hanno rendimento massimo quelle reversibili ossia quelle di carnot\\
+b) tutte le macchine di carnot che operano tra due termostati T1 e T2 hanno lo stesso rendimento \\
+c) il rendimento di una macchina di carnot dipende solo dalle temperature dei termostati tra i quali opera
+
+\item ENUNCIATO E DIMOSTRAZIONE DEL TEOREMA DI CLAUSIUS\\
+Considerando una macchina termica che opera agendo su un numero n di termostati e compie un lavoro Lm sull’ambiente
+
+\vspace{10mm}
+Considero ora che su questo n termostati operino n macchine di Carnot operanti tra un termostato T0 e un n-esimo termostato della macchina M.\\
+
+\vspace{20mm}
+Considero la macchina termica equivalente:\\
+
+\vspace{10mm}
+Essendo una macchina ciclica monoterma è necessario che\\ 
+$Q_T = \sum Q_i \leq 0$\\
+Per ogni macchina di Carnot è valida la relazione \\
+$\frac{Q_i}{T_0} + \frac{Q_i}{T_i} = 0 \Rightarrow Q_i = t_0 \frac{Q_i}{Q_0}$\\
+$Q_T = \sum Q_i = T_0 \sum \frac{Q_i}{T_i} \leq 0$\\
+Siccome la macchina è reversibile devono valere nello stesso tempo le seguenti condizioni:\\
+\begin{equation*}
+\begin{cases}
+Q_T = T_0 \sum \frac{Q_i}{T_i} \leq 0\\
+Q_T = T_0 \sum \frac{Q_i}{T_i} \geq 0
+\end{cases} \Rightarrow Q_T = 0
+\end{equation*}
+
+Nella situazione più generale in cui la trasformazione ciclica sia accompagnata da scambi di calore con una successione, di corpi a diversa temperatura T, si può assumere che il sistema interagisca con una distribuzione continua di serbatoi con ciascuno dei quali può scambiare o meno una quantità infinitesima di calore dQ; mediante integrazione \\
+$\oint \frac{dQ}{T} \leq 0$ $\rightarrow$ integrale di Clausius
+
+\item ENUNCIATO E DIMOSTRAZIONE DEL PRINCIPIO DELL’AUMENTO DELL’ENTROPIA\\
+Definita la funzione di Stato entropia come:\\
+$DeltaS = \int \frac{dQ}{T}$\\
+Considerando un sistema termicamente isolato è sempre vero che:\\
+$dQ = 0$\\
+Dunque non può essere vero altro che:\\
+$\Delta S \geq 0$ con $\Delta S = 0$ per trasformazioni reversibili\\
+Il sistema isolato per eccellenza è l’universo termodinamico; nella realtà trasformazioni perfettamente reversibili non esistono. Dunque l’entropia dell’universo tende sempre ad aumentare.
+
+\item UTILIZZO DEL PRINCIPIO DI AUMENTO DELL’ENTROPIA NEL SECONDO PRINCIPIO DELLA TERMODINAMICA \\
+Considerando una macchina ciclica che scambia calore con un solo termostato; la variazione di entropia dell’universo di tale ciclo è pari a quella del termostato:\\
+$\Delta S_U = -\frac{Q}{T}$
+Tuttavia l’entropia deve essere $\Delta S \geq 0$ ciò vuol dire quindi che:\\
+$Q\leq0$\\
+Confermando nuovamente la validità del l’enunciato di Kelvin 
+
+\item UTILIZZO DEL PRINCIPIO DI AUMENTO DELL’ENTROPIA NELLA DIMOSTRAZIONE DEL TEOREMA DI CARNOT\\
+Considero una macchina termica qualsiasi che assorba calore $Q>0$ e che compia lavoro sull’ambiente $L > 0$ cedendo il calore $L-Q$ a un serbatoio freddo; la variazione di entropia dell’universo coincide con quella delle sorgenti:\\
+$\Delta S_U = \Delta S_1 + \Delta S_2 = \frac{-Q}{T_1} + \frac{-Q}{T_2} = Q \left(\frac{1}{T_2} - \frac{1}{T_1}\right) - \frac{L}{T_2}$\\
+$L = Q (1 - \frac{T_2}{T_1}) - T_2 \Delta S_U$\\
+$\eta = \frac{L}{Q} = \left(1 - \frac{T_2}{T_1}\right) - \frac{T_2}{Q} \Delta S_U$\\
+È quindi stato identificato il rendimento di una macchina termica e confermato che la macchina di Carnot è la più efficace possibile.\\
+
+\item Equazione differenziale moto armonico\\
+$\frac{d^2x}{dt^2} x(t) + \omega^2 x(t) = 0$
+
+\end{enumerate}
+\end{multicols*}
+\end{document}
