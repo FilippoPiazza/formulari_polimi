@@ -1,0 +1,1001 @@
+\documentclass[10pt,landscape, a4paper]{article}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage{pgfplots}			% grafici
+\usepackage{imakeidx}			% indice			
+\usepackage{array}				% matrici
+\usepackage{mathtools}			% matematica		
+\usepackage{chngcntr}			% counter per gli esercizi
+\usepackage{multicol}			% colonne multiple
+\usepackage[italian]{babel}
+
+% Impostazioni grafici pgfplots, altrimenti si lamenta
+\pgfplotsset{compat=1.18}
+
+\mathtoolsset{showonlyrefs}
+
+% Definizione dell'ambiente "Definizione"
+\newtheorem{defn}{Definizione}
+\newenvironment{definition}{\begin{mdframed}[backgroundcolor=Ivory2]\begin{defn}}{\end{defn}\end{mdframed}}
+
+% Definizione dell'ambiente "Teorema"
+\newtheorem{teorema}{Teorema}
+\newenvironment{thm}{\begin{mdframed}[backgroundcolor=white]\begin{teorema}}{\end{teorema}\end{mdframed}}
+
+% Definizione dell'ambiente "Dimostrazione"
+\newtheorem{demnstrn}{Dimostrazione}
+\newenvironment{dimostrazione}{\begin{mdframed}[backgroundcolor=white]\begin{demnstrn}}{\end{demnstrn}\end{mdframed}}
+
+
+
+\pdfinfo{
+  /Title (example.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Seamus)
+  /Subject (Example)
+  /Keywords (pdflatex, latex,pdftex,tex)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=0.5cm,left=.5cm,right=.5cm,bottom=.5cm} }
+        {\geometry{top=.5cm,left=.5cm,right=.5cm,bottom=.5cm} }
+    }
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+%My Environments
+\newtheorem{example}[section]{Example}
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+%\begin{center}
+    %\Large{\underline{Title}} \\
+%\end{center}
+
+\section{Analisi 2}
+
+\subsection*{Equazioni differenziabili a variabili separabili}
+$y' = -2xy^2$
+\begin{enumerate}
+	\item Cerco soluzioni costanti: $y' = 0 \Rightarrow -2xy^2 = 0 \Rightarrow y = 0$
+	\item Separo le variabili: $\frac{y'}{y^2} = -2x \Rightarrow \int y^{-2}dy = \int -2xdx \Rightarrow -\frac{1}{y} = -2\frac{x^2}{2} +c \Rightarrow y = \frac{1}{x^2+c}$
+\end{enumerate}
+
+\subsection*{Equazioni differenziali lineari}
+$y' + 2y = e^x$
+\begin{enumerate}
+	\item Cerco soluzioni costanti: $\mu(x) = e^{\int P(x)dx}$
+	\item Moltiplico l'equazione originale per il fattore integrante: $\mu(x)y' + \mu(x)P(x)y = \mu(x)Q(x)$. Il lato sinistro diventa una derivata di un prodotto: $\frac{d}{dx} (\mu(x)y) = \mu(x)Q(x)$ che diventa $\mu(x)y = \int \mu(x)Q(x)dx +C$
+	\item Isolo la variabile $y$: $y = \frac{1}{\mu(x)}\left(\int \mu(x)Q(x)dx +C\right)$
+\end{enumerate}
+
+\subsection*{Risolvere $e^{tM}$}
+\begin{enumerate}
+	\item Calcolo autovalori di $M$: $\lambda_1, \lambda_2$
+	\item Calcolo autovettori di $M$: $v_1, v_2$
+	\item Costruisco la matrice $S = \begin{pmatrix} v_1 & v_2 \end{pmatrix}$ e la matrice diagonale $\Lambda = \begin{pmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{pmatrix}$ e la matrice $S^{-1}$.
+	\item $e^{tM} = Se^{t\Lambda}S^{-1}$
+	\item Per problema di Cauchy omogeneo: $y(t) = e^{tM}y(0)$
+	\item Per problema di Cauchy non omogeneo: $y(t) = e^{tM}y(0) + e^{tM}\int_0^t e^{-sM}Q(s)ds$
+\end{enumerate}
+
+\subsection*{Problemi di Cauchy}
+Es: Risolvi il problema di Cauchy: $y'(t) = y^2(t)$ con $y(0) = -1$
+\begin{enumerate}
+	\item Ricavo le soluzioni costanti: $y'(t) = 0 \Rightarrow y^2(t) = 0 \Rightarrow y(t) = 0$
+	\item Separo le variabilie: $\frac{dy}{dx} = y^2 \Rightarrow \int y^{-2}dy = \int dx \Rightarrow -\frac{1}{y} = x + c$
+	\item Usando la 2° eq. del sistema ricavo c: $y(0) = -1 \Rightarrow -\frac{1}{-1} = 0 + c \Rightarrow c = 1$
+	\item ottengo la soluzione: $y(t) = \frac{-1}{t+1}$
+\end{enumerate}
+
+
+
+
+\subsection*{Equazioni di Bernoulli}
+Es: trova una soluzione generale dell'equazione di Bernoulli $y' = e^t y + y^{10}$. $[y = 0]$\\
+La forma generale è: $y' = a(x)y + b(x)y^\alpha$ con $\alpha \neq 1$\\
+$y = 0$ è soluzione costante.
+\begin{enumerate}
+	\item dividere per $y^\alpha$: $\frac{y'}{y^{10}} = e^t y^{-9} + 1$
+	\item introduco $Z(x)=y^{1-\alpha} = y^{-9}$. Riscrivendo in funzione di $Z$, l'eq sarà lineare.
+	\item Derivo $Z$ e sostituisco: $Z' = -9y^{-10}y' \Rightarrow y' = -\frac{1}{9}Z'y^{10}$\\
+		  $\frac{-9Z'y^{10}}{y^{10}} = e^t Z + 1 \Rightarrow Z' = \frac{-e^tZ}{9} - \frac{1}{9}$\\
+		  Allora $a(x) = -\frac{-e^t}{9}$ e $b(x) = \frac{1}{9}$
+	\item Ottenuta l'eq. lineare sirolvo come sopra separando le variabili.
+\end{enumerate}
+
+\subsection*{EDO II}
+\begin{enumerate}
+	\item Scrivo polimio caratteristico: Es: $y'' - 5y' -6y = 0 \Rightarrow \lambda^2 -5\lambda -6 = 0$
+	\item Calcolo $\Delta$ e i valori di $\lambda_1$ e $\lambda_2$ e omogenea $y_{omo}$
+		\begin{itemize}
+			\item $\Delta > 0 \Rightarrow \quad y(x) = c_1e^{\lambda_1 x} + c_2e^{\lambda_2 x}$
+			\item $\Delta = 0 \Rightarrow \lambda_1 = \lambda_2 \Rightarrow \quad y(x) = c_1e^{\lambda_1 x} + c_2xe^{\lambda_2 x}$
+			\item $\Delta < 0 \Rightarrow \lambda = m \pm ni \Rightarrow \quad y(x) = e^{mx}[c_1\cos(nx) + c_2\sin(nx)]$
+		\end{itemize}
+	\item Calcolo la soluzione particolare $y_p$\\
+		Es: $y'' +9y = sin(3t)$
+		\begin{itemize}
+			\item Scrivo $y_p$ basandomi su $y_{omo}$: $y_p = \left[A\cos(3t) + B\sin(3t)\right] \cdot t$\\
+					NB: Visto che $sin(3t)$ è già soluzione dell'omogenea, aggiungo $t$
+			\item Calcolo $y_p'$ e $y_p''$: $y_p' = Acos(3t) + Bsin(3t) + t \left(-3Asin(3t)+3Bcos(3t)\right)$
+					$y_p'' = -3Asin(3t) + 3Bcos(3t) - \left(-3Asin(3t) + 3Bcos(3t)\right) + t \left(-9Acos(3t) - 9Bsin(3t)\right)$
+			\item L'eq è $y_p'' + 9y = sin(3t)$: sostituisco $y_p$: $y''_p + 9y_p = -6Asin(3t) + 6Bcos(3t) + 9Atcos(3t) + 9Btsin(3t) = sin(3t)$
+			\item Svolgo i calcoli e ottengo $A$ e $B$: $A = -\frac{1}{6}$ e $B = 0$
+			\item Sostiuisco $A$ e $B$ in $y_p$ e ottengo la soluzione completa: $y_p(t) = -\frac{1}{6}t\cos(3t)$
+			\item Scrivo la soluzione finale: $y = y_{omo} + y_p$
+		\end{itemize}
+\end{enumerate}
+
+\subsection*{Sistemi di EDO}
+\subsubsection*{Metodo 1: sostituzione}
+
+
+\subsubsection*{Metodo 2: matriciale}
+\begin{equation*}
+	\begin{cases}
+		y_1' = y_1 +2y_2\\
+		y_2' = 4y_1 + 3y_2
+	\end{cases}
+\end{equation*}
+\begin{enumerate}
+	\item Ricavo A: $A = \begin{pmatrix} 1 & 2 \\ 4 & 3 \end{pmatrix}$
+	\item Calcolo det(A-$\lambda$I): $det(A-\lambda I) = (1-\lambda)(3-\lambda) - 8 = 0$
+	\item Ricavo autovalori: $\lambda^2 -4\lambda -5 = 0 \Rightarrow (\lambda -5)(\lambda +1) = 0$ quindi $\lambda_1 = 5$ e $\lambda_2 = -1$
+	\item Calcolo gli autovettori associati:
+		\begin{equation*}
+			\lambda_1 = 5 \Rightarrow \begin{bmatrix} -4 & 2 \\ 4 & -2 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}= \begin{bmatrix} 0 \\ 0 \end{bmatrix} \Rightarrow x_1 = 2x_2
+		\end{equation*}
+		analogo per $\lambda_2 = -1$: $x_1 = -x_2$
+	\item Ottengo la soluzione: $y(t) = W(t) \cdot \underline{c}$ con $W(t)$ matrice wronskiana e $\underline{c}$ vettore delle costanti.\\
+		Quindi $\underline{y}(t) = c_1\mu_1e^{\lambda_1t} + c_2\mu_2e^{\lambda_2t}$ con $\mu_1$ e $\mu_2$ autovettori.\\
+		Quindi $\underline{y}(t) = c_1\begin{pmatrix} 1 \\ -1 \end{pmatrix}e^{-t} + c_2\begin{pmatrix} 1 \\ 2 \end{pmatrix}e^{5t}$
+
+\end{enumerate}
+
+\subsection*{Serie}
+
+Telescopica: $\sum_{n=n_0}^{\infty} a_n$ con $a_n = b_{(n+1)} - b_n$\\
+Geometrica: $\sum_{n=0}^{\infty} x^n = \frac{1}{1-x}$ se $|x| < 1$ converge.\\
+Geometrica complessa $\sum_{n=0}^{\infty} z^n = \frac{1}{1-z}$ se $|z| < 1$ converge.\\
+Posso ridurre una telescopica a una geometrica con $n=0$
+\begin{equation*}
+	\sum_{n=2}^{\infty} (\frac{2}{3})^n = \sum_{n=0}^{\infty} (\frac{2}{3})^n -\frac{2}{3}^0 - \frac{2}{3}^1
+\end{equation*}
+Bata sottrarre $b^0, b^1, \dots, b^{n_0-1}$
+
+\subsubsection*{Serie di potenze}
+$\sum_{n=0}^{\infty} a_n(x-x_0)^n$ e R. di conv.\\
+Es: $\sum_{n=0}^{\infty} \frac{x^n}{2n} = \sum \frac{1}{2^n} \cdot x^n$
+\begin{enumerate}
+	\item Calcolo il raggio di convergenza:
+		\begin{enumerate}
+			\item $R = \lim_{n \to \infty} \left\lvert \frac{a_n}{a_{n+1}} \right\rvert$
+			\item $R = \lim_{n \to \infty}  \frac{1}{\sqrt[n]{|a_n|}} $
+		\end{enumerate}
+	\item Dato R studio le frontiere dell'insieme di convergenza: $x \in (-2,2)$\\
+		$x = -2 \Rightarrow \sum_{n=0}^{\infty} \frac{-2^n}{2n} = \sum_{n=0}^{\infty} -1^n$ oscilla, quindi non converge.\\
+		$x = 2 \Rightarrow \sum_{n=0}^{\infty} \frac{(-2)^n}{2n} = \sum_{n=0}^{\infty} 1^n = +\infty$ diverge.\\
+		Dato che diverge in entrambi i casi escludo le frontiere: $I = (-2,2)$\\
+\end{enumerate}
+Dunque converge semplicemente e non totalmente.\\
+Esercizio serie di potenze con serie geometrica:\\
+$\frac{1}{1+x^4} = \sum(-x^4)^n$\\
+Moltiplico per 2x: \space $\frac{2x}{1+x^4} = \sum2x(-x^4)^n = 2\sum(-1)^n x^{4n+1}$\\
+Integro: $\int\frac{2x}{1+x^4} dx = \sum2(-1)^n\int x^{4n+1} dx = \sum(-1)^n \frac{x^{4n+2}}{2n+1}$
+
+\subsubsection*{Convergenza}
+\begin{itemize}
+	\item Convergenza in media quadratica: $f$ periodica e regolare a tratti
+	\item Convergenza puntuale: $x \neq \pi + 2k\pi$ dove è $f$ è continua
+	\item Convergenza totale: $f$ è continua (non è unica condizione)
+		Serie di potenze su intervallo chiuso converge totalmente.\\
+		NB: Totale implica puntuale e media quadratica.
+	\item Sia $\sum_{n=1}^{\infty} (-1)^n a_n$ una serie con $a_n \geq 0$, se $\lim_{n \to \infty} a_n = 0$ e $a_{n+1} \leq a_n$ per $n \geq n_0$, allora per il criterio di Leibniz, la serie converge.
+	\item Se la serie di Fourier ha derivata prima continua ed è limitata in un intervallo allora converge totalmente.
+	\item Se ho serie geometrica con numeratore contentente $sin$ o $cos$ e il denominatore è una potenza di $n$ allora la serie converge totalmente.
+	\item Una serie di potenze ha convergenza totale in ogni intervallo chiuso contenuto nell'insieme di convergenza.
+    \item Una SDF converge totalmente se $\sum(|a_n|+|b_n|)<\infty$ converge
+\end{itemize}
+
+\subsubsection*{Serie di Fourier}
+\begin{enumerate}
+	\item La serie generale è $f(x) = a_0 + \sum_{k=1}^{\infty}(a_kk cos(kx) + b_ksin(kx))$ su $\mathbb{I} = [-\pi, \pi]$
+	\item Si calcola $a_0 = \frac{1}{2\pi} \int_{-\pi}^{\pi} f(x)dx$
+	\item Si calcola $a_k = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x)cos(kx)dx$
+	\item Si calcola $b_k = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x)sin(kx)dx$
+\end{enumerate}
+NB:
+\begin{itemize}
+	\item Se la funzione è pari allora $b_k = 0$, se è dispari allora $a_k = 0$
+	\item Se la funzione è pari si può trasformare: $a_0 = \frac{1}{2\pi} \int_{-\pi}^{\pi} f(x)dx = \frac{1}{\pi} \int_{0}^{\pi} f(x)dx$. Al posto di $\pi$ potrebbe esserci $\frac{\pi}{2}$. La stessa trasformazione vale anche per $a_k$.
+	\item Se la serie di Fourier è di una funzione a tratti bisogna valutare ogni intervallo.
+	\item Somma della serie di Fourier: $F(x) = lim_{m \to \infty} F_m(x)$
+\end{itemize}
+
+\subsection*{Curve}
+\begin{itemize}
+	\item Chiusa? Verificare se la funzione è uguale agli estremi. Es: $r(t) = (t^2, t^2+1, cos(t))$ con $t \in [-\pi, \pi] \Rightarrow r(-\pi) = r(\pi)$
+	\item Regolare? se la derivata prima è sempre diversa da 0. Es: $r'(t) = (2t, 2t, -\sin(t))$ se $t=0 \Rightarrow r'(0) = 0$ non è regolare.
+	\item Lunghezza: $\int_a^b \left\lVert r'(t) \right\rVert dt$. Es: $\left\lVert r'(t) \right\rVert = \sqrt{9sin^2(t) cos^4(t)+9cos^2(t)sin^4(t)}$ la lunghezza è $\mathcal{L} = \int_{0}^{2\pi} \left\lVert r'(t) \right\rVert dt = 6$
+	\item Versore tangente $T(t) = \frac{r'(t)}{\left\lVert r'(t) \right\rVert}$
+	\item Versore ortogonale: inverto le componenti e cambio il segno di una rispetto al versore tangente.
+\end{itemize}
+\subsubsection*{Curve di livello}
+Disegna una curva di livello 3 della funzione $f(x,y) = e^{x^2+y}$\\
+Scrivo $e^{x^2+y} = 3$. (3 è il valore del livello)
+
+\subsection*{Integrali curvilinei}
+\begin{equation*}
+	\int_{\gamma} f ds = \int_{a}^{b} f(r(t))\left\lVert r'(t) \right\rVert dt
+\end{equation*}
+Es: $\delta(x,y,z) = \frac{x^2 |y|}{\sqrt{\frac{4}{9}x^2+\frac{9}{4}y^2}}$, $\mathbb{I} = [0,2]$, $r(\theta) = (3cos(\theta), 2sin(\theta), 1)$, $\left\lVert r'(\theta) \right\rVert = \sqrt{9sin^2(\theta) + 4cos^2(\theta)}$\\
+\begin{enumerate}
+	\item Calcolo $\delta(r(\theta))$: sostituisco le $x$ di $r(\theta)$: $\delta(r(\theta)) = \frac{9cos^2(\theta) |2sin(\theta)|}{\sqrt{\frac{4}{9}9cos^2(\theta)+\frac{9}{4}4sin^2(\theta)}}$
+	\item Calcolo l'integrale: $\int \delta(r(\theta))\left\lVert r'(\theta) \right\rVert = \int_{0}^{2} 9(cos(\theta))^2 2|sin(\theta)|  d\theta = 24$
+\end{enumerate}
+
+\subsection*{Dominio}
+Tipologie:
+\begin{itemize}
+	\item Limitato: si può inscrivere in un cerchio
+	\item Illimitato: non si può inscrivere in un cerchio
+	\item Aperto: Tutta la frontiera non appartiene al dominio
+	\item Chiuso: Tutta la frontiera appartiene al dominio
+	\item Né aperto né chiuso: la frontiera appartiene solo in parte al dominio
+	\item Connesso: dati due punti all'interno del dominio, posso collegarli senza uscire dal dominio
+\end{itemize}
+
+
+\subsection*{Limiti}
+Limiti notevoli:
+\begin{itemize}
+	\item $\lim_{z \to 0} \frac{\sin z}{z} = 1 \Leftrightarrow sin(z)_{(z\to0)} \sim z$
+	\item $\lim_{z \to 0} \frac{e^z-1}{z} = 1 \Leftrightarrow e^z-1_{(z\to0)} \sim z$
+	\item $\lim_{z \to 0} \frac{\log(1+z)}{z} = 1 \Leftrightarrow \log(1+z)_{(z\to0)} \sim z$
+	\item $\lim_{z \to 0} \frac{1-\cos z}{\frac{1}{2}z^2} = 1 \Leftrightarrow (1-\cos z)_{(z\to0)} \sim \frac{1}{2}z^2$
+	\item $\lim_{z \to 0} \frac{(1+z)-1}{\alpha^z} = 1 \Leftrightarrow (1+z)^\alpha-1_{(z\to0)} \sim \alpha z$
+\end{itemize}
+Risoluzione di limiti:
+\begin{enumerate}
+	\item Controllo se posso usare limiti notevoli
+	\item Converto in coordinate polari (NB: il limite diventarà $\rho \to 0$)
+\end{enumerate}
+Es:
+\begin{equation*} 
+	\begin{gathered}
+	lim_{(x,y) \to (0,0)} \frac{1+x^2y}{\sqrt{2x^2+y^2}} = lim_{(x,y) \to (0,0)} \frac{x^2y}{\sqrt{2x^2+y^2}}\\ 
+	= lim_{\rho \to 0} \frac{\rho^2cos^2(\theta)\rho sin(\theta)}{\sqrt{2\rho^2cos^2(\theta)+\rho^2sin^2(\theta)}} = lim_{\rho \to 0} \frac{\rho cos^2(\theta)sin(\theta)}{\sqrt{2cos^2(\theta)+sin^2(\theta)}} = 0
+	\end{gathered}
+\end{equation*}
+
+
+\subsection*{Differenziabilità}
+\begin{itemize}
+	\item $f$ è differenziabile in $x_0 \in \mathbb{D}(f)$ se $lim_{h \to 0} \frac{f(x_0+h)-f(x_0)-\left\langle \nabla f(x_0), h \right\rangle}{\left\lVert h \right\rVert} = 0$, quindi se esiste il gradiente $\nabla f(x_0)$
+	\item Differenziabilità implica derivabilità
+	\item $\nabla f(x,y) = (f_x(x,y), f_y(x,y))$
+	\item Teorema gradiente: $\frac{\delta f}{\delta \underline{v}}(P) = \left\langle \underline{v}\cdot\nabla f(P)  \right\rangle$ dove $\frac{\delta f}{\delta \underline{v}}$ è la derivata direzionale di $f$ lungo $\underline{v}$ versore, P punto.
+
+		Es: $f(x,y) = x^2 y^3$ $P(2,3)$
+		\begin{enumerate}
+			\item Controllo se $f(x,y)$ è continua.
+			\item Calcolo derivate parziali: $f_x = 2xy^3$ e $f_y = 3x^2y^2$
+			\item Calcolo gradiente: $\nabla (2,3) = (4\cdot 3^3, 12 \cdot 3^2)$
+			\item Calcolo derivata direzionale: $\frac{\delta f}{\delta \underline{v}}(2,3) = \left\langle \left(108,108\right)\cdot \left(cos(\alpha), sin(\alpha)\right)\right\rangle = 108(cos(\alpha)+sin(\alpha))$. NB: Se non ho $\underline{v}$ allora pongo $(cos(\alpha), sin(\alpha))$
+		\end{enumerate}
+	\item Teorema ortogonalità gradiente: Se $f : \mathbb{R}^n \to \mathbb{R}$ è differenziabile, allora $\nabla f(\mathbf{x}) \cdot \mathbf{v} = 0$ per ogni vettore $\mathbf{v}$ tangente alla curva di livello di $f$ in $\mathbf{x}$.
+	\item Posso calcolare la pendenza: (retta tangente)
+		\begin{itemize}
+			\item Pendenza minima: $f_{\min} = -\left\lVert \nabla f(x_0,y_0) \right\rVert$
+			\item Direzione minima: $v_{\min} = -\frac{\nabla f(x_0,y_0)}{\left\lVert \nabla f(x_0,y_0) \right\rVert}$
+			\item Pendenza massima: $f_{\max} = \left\lVert \nabla f(x_0,y_0) \right\rVert$
+			\item Direzione massima: $v_{\max} = \frac{\nabla f(x_0,y_0)}{\left\lVert \nabla f(x_0,y_0) \right\rVert}$
+		\end{itemize}
+\end{itemize}
+
+\subsection*{Estremi liberi} (calcolo estremi relativi)\\
+$f(x,y) = 2x^2 + y^3 -3x^2 -3y$ con $\mathbb{D} =\mathbb{R} ^2$
+\begin{enumerate}
+	\item Studio il $\nabla$ e lo pongo $=0$
+		\begin{equation*}
+			\nabla f = 0 \Rightarrow \begin{cases}
+				f_x = 0\\
+				f_y = 0
+			\end{cases} \Rightarrow \begin{cases}
+				6x^2 -6x=0
+				3y^2 -3 = 0
+			\end{cases}
+		\end{equation*}
+	\item I punti sono tutte le possibili coppie che risolvono il sistema: $A(0,-1), B(0,1), C(1,-1), D(1,1)$
+	\item Creo la $H_F$ e calcolo il det.
+		\begin{equation*}
+			H_f = \begin{pmatrix}
+				f_{xx} & f_{xy}\\
+				f_{yx} & f_{yy}
+			\end{pmatrix} = \begin{pmatrix}
+				12x-6 & 0\\
+				0 & 6y
+			\end{pmatrix} \Rightarrow det(H_f) = 36y(2x-1)
+		\end{equation*}
+	\item Studio det per ogni punto: $det(H_A) = \dots$
+		\begin{enumerate}
+			\item $det > 0$ e $f_{xx} > 0 \Rightarrow$ minimo
+			\item $det > 0$ e $f_{xx} < 0 \Rightarrow$ massimo
+			\item $det < 0 \Rightarrow$ punto di sella
+		\end{enumerate}
+	\item Se $det = 0$
+		\begin{itemize}
+			\item Studio segno: $Sgn(f(x,y)-f(x_0,y_0))$ dati $x_0 = 0$ e $y_0 = 0$: $sgn(f(x,y)) = sgn(2x^2 -3xy^2+y^4)$
+			\item $2x^2 -3xy^2+y^4 \geq 0$
+			\item Faccio disegno qualitativo
+			\item Studio disegno. In questo caso intorno all'origine ho $+$ e $-$ quindi è un punto di sella.
+		\end{itemize}
+\end{enumerate}
+
+\subsection*{Estremi vincolati}
+$z = f(x,y) = x^3 -xy^2$
+\begin{enumerate}
+	\item Scrivo e disegno le restrizioni:
+		\begin{itemize}
+			\item Restrizione di $f$ su $OA$: $\begin{cases}
+				f(x,0) = x^3\\
+				0 \leq x \leq 1
+			\end{cases}$
+			\item Restrizione di $f$ su $AB$: $\begin{cases}
+				f(1,y) = 1-y^2\\
+				-1 \leq y \leq 1
+			\end{cases}$
+			\item Restrizione di $f$ su $BC$: $\begin{cases}
+				f(x,1) = x^3-x\\
+				-1 \leq y \leq 1
+			\end{cases}$
+			\item Restrizione di $f$ su $OC$: $\begin{cases}
+				f(0,y) \to 0 \quad \textnormal{Linea di livello}\\
+				-1 \leq y \leq 1
+			\end{cases}$
+		\end{itemize}
+	\item Trovo i candidati: $MAX: A(1,0)$ e $MIN: D(\frac{1}{\sqrt{3}},1)$
+	\item Se avessi più candidati dovrei vedere il valore di $f$ nei punti candidati e confrontarli.
+\end{enumerate}
+
+\subsubsection*{Metodo comodo} (moltiplicatori di Lagrange)\\
+Vincolo: $x^2 + y^2 = 1$, funzione $f(x,y) = e^{x^2-y}$
+\begin{enumerate}
+	\item Scrivo il sistema composto da $f_x = \lambda V$ e $f_y = \lambda V$
+		\begin{equation*}
+			\begin{cases}
+				2xe^{x^2-y} = 2\lambda x\\
+				-e^{x^2-y} = 2\lambda y\\
+				x^2 + y^2 = 1
+			\end{cases}
+		\end{equation*}
+	\item Risolvo il sistema e scrivo i punti
+		\begin{equation*}
+			\begin{cases}
+				x = 0\\	
+				y = \pm 1
+			\end{cases} \quad  \begin{cases}
+				x = \pm \frac{\sqrt{3}}{2}\\
+				y = - \frac{1}{2}
+			\end{cases} \quad P_1, P_2, P_3, P_4
+		\end{equation*}
+	\item Studio $f(P_i)$ e scrivo MAX e MIN: $max f = e^{\frac{5}{4}}$ e $min f = e^{-1}$
+\end{enumerate}
+
+\subsection*{Integrali}
+Primitive notevoli:
+\begin{itemize}
+	\item $\int 1 dx = x + c$
+	\item $\int \frac{1}{x}dx = \log|x| + c$
+	\item $\int \frac{1}{\sqrt{x}}dx = 2 \sqrt{x}+ c$
+	\item $\int e^x dx = e^x + c$
+	\item $\int e^{kx} dx = \frac{e^{kx}}{k} + c$
+	\item $\int a^x dx = \frac{a^x}{\log(a)} + c$
+	\item $\int x^n dx = \frac{x^{n+1}}{n+1} + c \quad \quad \forall n \neq -1$
+	\item $\int \sin x dx = -\cos x + c$
+	\item $\int \cos x dx = \sin x + c$
+	\item $\int \cos(nx) dx = \frac{1}{n}sin(nx)$
+	\item $\int \sin(nx) dx = -\frac{1}{n}cos(nx)$
+	\item $\int \frac{1}{1+x^2}dx = \arctan x + c$
+	\item $\int \frac{1}{\sqrt{1-x^2}}dx = \arcsin x + c$
+	\item $\int \frac{1}{\sqrt{x^2-1}}dx = \arccos x + c$
+\end{itemize}
+
+Integrazione per parti: $\int f(x)g'(x)dx = f(x)g(x) - \int f'(x)g(x)dx$\\
+Integrazione per sostituzione: $\int f(g(x))g'(x)dx = \int f(u)du$ con $u = g(x)$ e $du = g'(x)dx$. Cambiano anche gli estremi di integrazione da $a$ a $g(a)$, uguale per b.\\
+
+Per le derivate vale la regola del quozionte:
+\begin{equation}
+	D \left[\frac{f(x)}{g(x)}\right] = \frac{f'(x)\cdot g(x)- f(x)\cdot g'(x)}{(g(x))^2}
+\end{equation}
+
+\subsubsection*{integrali tripli}
+$\iiint_\Omega f(x,y,z)dxdydz$ con $\Omega = \{(x,y,z) \in \mathbb{R}^3 | x \geq 0, y \geq 0, z \geq 0, x+y+z \leq 2\}$\\
+\begin{enumerate}
+	\item Studio il vincolo $\Omega$ disegnandolo: è un tetraedro con vertici in $(0,0,0)$, $(2,0,0)$, $(0,2,0)$ e $(0,0,2)$
+	\item Devo scomporre il vincolo per ottenere i limiti di integrazione: $0 \leq x \leq 2$, $0 \leq y \leq 2-x$, $0 \leq z \leq 2-x-y$.
+			nei vincoli degli integrali più esterni non devono apparire le variabili degli integrali più interni.
+	\item Calcolo l'integrale: $\int_0^2 \int_0^{2-x} \int_0^{2-x-y} f(x,y,z)dzdydx$\\
+		$\iint \left(\int_{0}^{2-x-y}xzdz\right)dxdy$
+	\item ottengo un integrale doppio che posso risolvere analogaente a come ho fatto sopra.
+\end{enumerate}
+
+{\textbf{NB} se passo a coordinate polarie o sferiche, l'integrale doppio diventa:\\
+\begin{math}
+	\iint g(\rho, \theta) \rho d\rho d\theta \quad \quad \begin{cases}
+		x = \rho \cos\theta\\
+		y = \rho \sin\theta
+	\end{cases}
+\end{math}
+
+\subsection*{Varie}
+
+Prodotto tra matrici:
+\begin{equation*}
+	\begin{pmatrix}
+		a & b\\
+		c & d
+	\end{pmatrix} \begin{pmatrix}
+		e & f\\
+		g & h
+	\end{pmatrix} = \begin{pmatrix}
+		a\cdot e + b\cdot g & a\cdot f + b\cdot h\\
+		c\cdot e + d\cdot g & c\cdot f + d\cdot h
+	\end{pmatrix}
+\end{equation*}
+
+Calcolo autovalori:
+\begin{equation*}
+	\begin{vmatrix}
+		a-\lambda & b\\
+		c & d-\lambda
+	\end{vmatrix} = 0 \Rightarrow (a-\lambda)(d-\lambda) - bc = 0
+\end{equation*}
+
+Calcolo autovettori:
+\begin{equation*}
+	\begin{pmatrix}
+		a-\lambda & b\\
+		c & d-\lambda
+	\end{pmatrix} \begin{pmatrix}
+		x\\
+		y
+	\end{pmatrix} = \begin{pmatrix}
+		0\\
+		0
+	\end{pmatrix}
+\end{equation*}
+
+Determinante:
+\begin{equation*}
+	\begin{vmatrix}
+		a & b\\
+		c & d
+	\end{vmatrix} = ad - bc
+\end{equation*}
+
+
+Formule duplicazione:\\
+$sin(2\alpha) = 2sin(\alpha)cos(\alpha)$\\
+$cos(2\alpha) = cos^2(\alpha) - sin^2(\alpha)$\\
+$cos(2\alpha) = 1- 2sin^2(\alpha)$\\
+$cos(2\alpha) = 2cos^2(\alpha) - 1$\\
+
+Identità di Parseval:\\
+$\frac{1}{\pi}\int_{-\pi}^{\pi} f^2(x)dx = \frac{a_0^2}{2} + \sum_{n=1}^{\infty} (a_n^2 + b_n^2)$\\
+
+Equazione piano tangente a funzione $f(x,y)$ in $(x_0,y_0)$:\\
+$z = f(x_0,y_0) + f_x(x_0,y_0)(x-x_0) + f_y(x_0,y_0)(y-y_0)$\\
+$\text{ } \ = \nabla f(x_0,y_0) \cdot (x-x_0,y-y_0) + f(x_0,y_0)$\\
+
+Matrice hessiana:\\
+$H_f = \begin{pmatrix}
+	f_{xx} & f_{xy}\\
+	f_{yx} & f_{yy}
+\end{pmatrix}$\\
+
+Rotore:\\
+$\nabla \times \underline{v}$ con $\underline{v}$ vettore direzione.\\
+Rotore nullo implica che il campo è conservativo.\\
+
+Per un campo vettoriale $ \mathbf{F} = (F_1, F_2, F_3) $ in $ \mathbb{R}^3 $, la divergenza è definita come: $\text{div} \, \mathbf{F} = \nabla \cdot \mathbf{F} = \frac{\partial F_1}{\partial x} + \frac{\partial F_2}{\partial y} + \frac{\partial F_3}{\partial z}$\\
+Dove $ \nabla \cdot $ rappresenta l'operatore divergenza, che applicato a $ \mathbf{F} $ somma le derivate parziali delle componenti del campo rispetto alle loro rispettive variabili.\\
+
+Sviluppo in serie di Mac Laurin:\\
+$f(x) = f(0) + f'(0)x + \frac{f''(0)}{2!}x^2 + \dots + \frac{f^{(n)}(0)}{n!}x^n$\\
+
+Serie di Taylor funzione di due variabili del secondo ordine:\\
+$f(x, y) \approx f(a, b) + f_x(a, b) (x-a) + f_y(a, b) (y-b) + \frac{1}{2} f_{xx}(a, b) (x-a)^2 + f_{xy}(a, b) (x-a)(y-b) + \frac{1}{2} f_{yy}(a, b) (y-b)^2$
+
+
+Scala degli infiniti:\\
+Per $x \to \infty$:\\
+$\log(x) < x \approx kx < x^2 < x^3 < e^x < e^{x^2} < x! < x^x$\\
+Per $x \to 0$:\\
+$x^x < x! < e^{-x^2} < e^{-x} < x^3 < x^2 < x \approx kx < \log(x)$\\
+
+Teorema di Schwarz:\\
+Ordine derivate parziali è irrilevante: $f_{xy} = f_{yx}$\\
+
+Teorema di Weierstrass:\\
+Ogni funzione continua su un intervallo chiuso è limitata e raggiunge il massimo e il minimo.\\
+
+Esistenza e unicità locale di soluzione di un problema di Cauchy:\\
+Siano $f: A \subseteq \mathbb{R}^{n+1}\to \mathbb{R}$, con $A$ aperto in $\mathbb{R}^n$; $(t_0, y^0) \in A$, con $t_0 \in \mathbb{R}^n$ e $y^0 \in \mathbb{R}$
+$K := [t_0-r, t_0+r] \times \overline{B}_b(y^0)$ un compatto contenuto in $A$.\\
+Allora se $f$ continua in $A$ e le derivate parziali di $f$ rispetto a $y_i$ sono continue in $A$, allora esiste $\delta > 0$ e esiste un'unica soluzione al problema di Cauchy:
+\begin{equation*}
+	\begin{cases}
+		y'(t) = f(t, y(t))\\
+		y(t_0) = y^0
+	\end{cases} \quad \forall t \in [t_0-\delta, t_0+\delta]
+\end{equation*}\\
+
+Esempio integrazione serie geometrica:\\
+\begin{equation*}
+	arctan(x^2) = \int \frac{2x}{1+x^4} dx = \sum_{n=0}^{\infty} 2(-1)^n \int x^{4n+1} dx = \sum_{n=0}^{\infty} \frac{(-1)^n}{2n+1}x^{4n+2}
+\end{equation*}
+
+Prodotto vettoriale tra due vettori:\\
+$\underline{a} \times \underline{b} = \begin{pmatrix}
+	i & j & k\\
+	a_1 & a_2 & a_3\\
+	b_1 & b_2 & b_3
+\end{pmatrix} = (a_2b_3 - a_3b_2)i - (a_1b_3 - a_3b_1)j + (a_1b_2 - a_2b_1)k$\\
+Prodotto scalare tra due vettori:\\
+$\underline{a} \cdot \underline{b} = a_1b_1 + a_2b_2 + a_3b_3$\\
+
+}
+%\section{Section 2}
+%Text 2
+
+%\section{Section 3}
+%Etc.
+
+% You can even have references
+
+\begin{thm}
+	\textbf{Teorema Formula risolutiva per EDO lineari 1° ordine}\\
+$a,b: J\subseteq\mathbb{R}\to\mathbb{R}$ \quad $y'(t) = a(t)y(t)+b(t)$\\
+L'integrale generale è dato dalla formula:
+\begin{equation}
+	y(t)=e^{A(t)}+\left( \int e^{-A(x)}b(x)dx + c \right) \quad \forall c\in \mathbb{R}
+\end{equation}
+dove $A(t)$ è una primitiva di $a$.
+\end{thm}
+
+\begin{dimostrazione}
+\emph{\textbf{da sapere all'esame}}
+\begin{itemize}
+	\item Porto $ay$ sulla sinistra\\
+			$y'-ay=b$
+	\item Moltiplico l'equazione per $e^{-A}$\\
+			$e^{-A}y'-e^{-A}ay=e^{-A}b$
+	\item Riconosco\\
+			$y'(t)e^{-A(t)}-a(t)y(t)e^{-A(t)}=\left(y(t)e^{-A(t)}\right)$\\
+			Quindi la EDO iniziale si riscrive equivalentemente:\\
+			$(ye^{-A})'=be^{-A}$
+	\item Integro\\
+			$y(t)e^{-A(t)}=\int be^{-A(t)}dt+c$
+	\item Moltiplico tutto per $e^{A(t)}$\\
+			$y(t)=e^{A(t)}\left(\int be^{-A(t)}dt+c\right)$
+\end{itemize}
+\end{dimostrazione}
+\newpage
+
+
+
+\begin{thm}
+\textbf{Teorema di struttura dell'integrale generale di EDO del 2° ordine lineari omogenee}\\
+Siano $a,b,c : I \subseteq \mathbb{R} \to \mathbb{R}$ funzioni continue e $a \neq 0$ in $I$.\\
+L'integrale generale dell'eq omogenea
+\begin{equation}
+a(t)y''(t) + b(t)y'(t) + c(t)y(t) = 0
+\end{equation}
+
+è uno spazio vettoriale di dimensione 2, cioè le soluzioni sono tutte e sole della forma:
+\begin{equation}
+y_0(t) = c_1y_{0_1}+c_2y_{0_2} \quad \textnormal{con } c_1,c_2 \in \mathbb{R}^n
+\end{equation}
+dove $y_{0_1},y_{0_2}$ sono due soluzioni linearmente indipendenti.
+\end{thm}
+
+\begin{dimostrazione}
+\emph{\textbf{da sapere all'esame}}
+\begin{itemize}
+\item L'integrale generale dell'omogenea è:\\
+		$W = \{y \in V : ay''(t) + by'(t) + cy(t) = 0\}$
+\item W è un sottospazio vettoriale di V $\Leftrightarrow$ è chiuso rispetto alla somma e rispetto al prodotto per uno scalare. Questo è vero grazie al principio di sovrapposizione (caso particolare dell'omogenea).
+\item Devo dimostrare che W ha dimensione 2.
+\begin{enumerate}
+	\item[$i ) $] Determinare 2 soluzioni lineari indipendenti dell'equazione $y_{0_1}, y_{0_2}$
+	\item[$ii )$] Dimostrare che ogni soluzione $y$ della EDO si scrive come combinazione lineare di $y_{0_1}, y_{0_2}$
+	\item [$i )$] Scelgo $y_{0_1}$ soluzione del problema di Cauchy.\\
+				$$
+				\left\{
+				\begin{array}{ll}
+					ay''_{0_1}(t) + by'_{0_1}(t) + cy_{0_1}(t) = 0\\
+					y_{0_1}(0) = 1\\
+					y'_{0_1}(0) = 0
+				\end{array} \right.
+				$$
+				Verifico che $y_{0_1}, y_{0_2}$ sono soluzioni lineari indipendenti. Se per assurdo fossero una multiplo dell'altra\\
+				$ y_{0_1}(t) = \lambda y_{0_2}(t) \quad \forall t$\\
+				In particolare, per $t=0$ avrei $y_{0_1}(0) = \lambda y_{0_2}(0)$ avrei trovato $1=\lambda\cdot 0$ assurdo.
+	\item [$ii )$] Sia $y_0(t)$ soluzione dell'EDO, cerco $c_1,c_2\in \mathbb{R}$ tali che $y_0(t) = c_1y_{0_1}(t) + c_2y_{0_2}(t)$\\
+					$ y_0(t) = c_1y_{0_1}(t) + c_2y_{0_2}(t) = c_1$\\
+					\medskip
+					$ y_0'(t) = c_1y_{0_1}'(t) + c_2y_{0_2}'(t) = c_2$\\
+					In conclusione la funzione:\\
+					$z(t) = y_0(0)\cdot y_{0_1}(t) + y_0'(0)\cdot y_{0_2}(t)$\\
+					risolve lo stesso problema di Cauchy di $y_0(t)$ e quindi, grazie al teorema di esistenza e unicità di Cauchy, coincidono:\\
+					$y_0(t) = z(t) \quad \forall t$,\\
+					cioè $y_0(t)$ si scrive come combinazione lineare di $y_{0_1}, y_{0_2}$ con coefficienti $c_1=y_0(0)$ e $c_2=y_0'(0)$.\\
+\end{enumerate}
+\end{itemize}
+\end{dimostrazione}
+
+
+
+
+\begin{thm}
+\textbf{Calcolo del raggio di convergenza}\\
+	Data una serie di potenze reale $\sum_{n=0}^\infty a_n \left(x-x_0\right)^n$\\
+	\begin{enumerate}
+		\item[$i)$] se il limite esiste.\\$R=\lim_{n\to\infty} \left\lvert \frac{a_n}{a_{n+1}}\right\rvert = \lim_{n\to\infty} \frac{|a_n|}{|a_{n-1}|}$\\allora la serie di potenze ha raggio di convergenza $R$.
+		\item[$ii)$] se esiste il limite $R=\lim_{n\to\infty} \frac{1}{\sqrt[n]{\left\lvert a_n\right\rvert }}$ allora la serie di potenze ha raggio di convergenza $R$.
+	\end{enumerate}
+\end{thm}
+
+\begin{dimostrazione} 
+	\emph{\textbf{da sapere all'esame}}\\
+	% \emph{teorema:} se $a_n \in \mathbb{R}$ e $a_n \to 0$ allora $\lim_{n\to\infty} \frac{a_n}{a_{n+1}} = 0$\\
+	La serie di potenze converge assolutamente nel punto $\overline{x} \in \mathbb{R}$ se e solo se\\
+	$\sum_{n=0}^\infty \left\lvert a_n\right\rvert  \left\lvert \overline{x} -x_0\right\rvert ^n$ converge.\\
+	\begin{itemize}
+		\item se il criterio del rapporto è applicabile, ho convergenze se e solo se\\$\lim_{n\to\infty} \frac{b_{n+1}}{b_n} < 1\Leftrightarrow \left\lvert \overline{x} -x_0 \right\rvert < \frac{1}{\lim_{n\to\infty} \frac{a_{n+1}}{a_n}} = \lim_{n\to\infty} \frac{\left\lvert a_n\right\rvert }{\left\lvert a_{n+1}\right\rvert } = R$
+		\item se il criterio della radice è applicabile, la serie converge se e solo se\\$\lim_{n\to\infty} \sqrt[n]{b_n}<1$ e non converge se $\lim_{n\to\infty} \sqrt[n]{b_n}>1$\\
+		infatti, $lim_{n\to\infty} \sqrt[n]{b_n }<1  \Leftrightarrow lim_{n\to\infty} (|a_n|\cdot |\overline{x}-x_0|^n)^{\frac{1}{n}}<1 \Leftrightarrow |\overline{x}-x_0|\cdot lim_{n\to\infty} |a_n|^{\frac{1}{n}}<1 \Leftrightarrow |\overline{x}-x_0|<\frac{1}{lim_{n\to\infty} |a_n|^{\frac{1}{n}}} = \lim_{n\to\infty} \frac{1}{\sqrt[n]{|a_n|}} = R$
+		
+\end{itemize}
+\end{dimostrazione}
+
+
+
+
+
+\begin{thm}
+\textbf{Calcolo dei coefficienti di Fourier}\\
+	Sia $f:\mathbb{R}\to\mathbb{R}, 2\pi$ una funzione periodica e somma di una serie trigonometrica
+	\begin{equation}
+		f(x) = a_0 + \sum_{n=1}^\infty \left(a_n \cos(nx) + b_n \sin(nx)\right)
+	\end{equation}
+	Supponiamo inoltre di poter integrare termine a termine. Allora:
+	\begin{equation}
+		a_0 = \frac{1}{2\pi}\int_{-\pi}^\pi f(x)dx
+	\end{equation}
+	\begin{equation}
+		a_n = \frac{1}{\pi}\int_{-\pi}^\pi f(x)\cos(nx)dx
+	\end{equation}
+	\begin{equation}
+		b_n = \frac{1}{\pi}\int_{-\pi}^\pi f(x)\sin(nx)dx
+	\end{equation}
+\end{thm}
+
+
+\begin{dimostrazione}
+	\emph{\textbf{da sapere all'esame}}
+	\begin{itemize}
+		\item Integro $f$ in $\left(-\pi,\pi\right)$, uso integrazione termine a termine e formula di ortogonalità:
+			\begin{equation}
+				\int_{-\pi}^\pi f(x)dx = \int_{-\pi}^\pi \left(a_0 + \sum_{n=1}^\infty \left(a_n \cos(nx) + b_n \sin(nx)\right)\right)dx
+			\end{equation}
+			\begin{equation}
+				= \int_{-\pi}^\pi a_0dx + \sum_{n=1}^\infty a_n \int_{-\pi}^\pi \cos(nx)dx + \sum_{n=1}^\infty b_n \int_{-\pi}^\pi  \sin(nx)dx
+			\end{equation}
+			\begin{equation}
+				a_0 = \int_{-\pi}^\pi 1dx = 2\pi a_0
+			\end{equation}
+		\item Per trovare $a_n$, moltiplico $f$ per $\cos{nx}$, integro in $\left(-\pi,\pi\right)$, uso l'integrabilità termine a termine  ele formule di ortogonalità:
+			\begin{multline}
+				\int_{-\pi}^\pi f(x)\cos(nx)dx = \\ \int_{-\pi}^\pi \left(a_0 + \sum_{k=1}^\infty \left(a_k \cos(kx) + b_k \sin(kx)\right)\right)\cos(nx)dx
+			\end{multline}
+			\begin{multline}
+				= a_0 \int_{-\pi}^\pi \cos(nx)dx + \sum_{k=1}^\infty a_k \int_{-\pi}^\pi \cos(kx)\cos(nx)dx + \\ \sum_{k=1}^\infty b_k \int_{-\pi}^\pi \sin(kx)\cos(nx)dx
+			\end{multline}
+			\begin{equation}
+				= a_n \int_{-\pi}^\pi \cos^2(nx)dx = a_n\pi
+			\end{equation}
+		\item Per trovare $b_n$, moltiplico per $\sin{(nx)}$
+	\end{itemize}
+\end{dimostrazione}
+
+Criterio di Leibniz:
+una serie del tipo $\sum_{k=0}^{\infty} (-1)^k a_k$ converge se $a_k$ è decrescente.\\
+Piano tangente: $z=f(x_0,y_0) + f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)$\\
+Formula Taylor ordine n: $f(x)=\sum_{k=0}^{n}\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+R_n(x)$\\
+Resto di Peano: $R_n(x) = o[(x-x_0)^n]$\\
+Resto di Lagrange: $R_n(x)=\frac{f^{n+1}(c)}{(n+1)!}(x-x_0)^{n+1}$ NB: $c$ è cost incogn\\
+Derivata direzionale: $D_vf(x_0,y_0)=\nabla f(x_0,y_0)\cdot v$ prodotto scalare\\
+Derivate e int utili:\\
+$\frac{\delta}{\delta x} n cos(kx^m) = -k m n x^{m-1} sin(kx^m)$\\
+$\frac{\delta}{\delta x} nx^jcos(kx^m) = n x^{j-1} cos(kx^m) - k m x^m sin(kx^m)$\\
+$\frac{\delta}{\delta x} x^j e^{mx} = x^{j-1} e^{mx} (j+mx)$\\
+$\int x^j e^{mx} dx = \frac{e^{mx}(mx-1)}{m^2}+c$\\
+$\frac{\delta}{\delta x} log(x+k) = \frac{1}{x+k}$\\
+$\int log(x+k) = (k+x)log(x+k)-x+c$\\
+
+\newpage
+
+
+
+\begin{thm} 
+\textbf{Invarianza della lunghezza di una curva per riparametrizzazioni}\\
+	$[a,b] \subseteq \mathbb{R}$ e $\underline{r}: [a,b] \rightarrow \mathbb{R}^3$ la parametrizzazione di una curva regolare avente sostegno $\gamma$.\\
+	$underline[v]: [c,d] \rightarrow \mathbb{R}^3$, $\underline{v}(s) = \underline{r}(\phi(s))$ è una parametrizzazione equivalente con sostegno $\delta$.\\
+	Allora: lunghezza$(\gamma) =$ lunghezza$(\delta)$
+\end{thm}
+\begin{dimostrazione}
+	\emph{\textbf{da sapere all'esame}}\\
+	lunghezza$(\gamma) := \int_a^b \left\lVert \underline{r}'(t) \right\rVert dt$\\
+	lunghezza$(\delta) := \int_c^d \left\lVert \underline{v}'(s) \right\rVert ds$\\
+	\begin{equation}
+		\left\lVert\underline{v}'(s)\right\rVert = \left\lVert \underline{r}'(\phi(s))\right\rVert  \cdot \left\lvert \phi'(s)\right\rvert 
+	\end{equation}
+	Quindi lunghezza$(\delta) = \int_c^d \left\lVert \underline{r}'(\phi(s))\right\rVert  \cdot \left\lvert \phi'(s)\right\rvert ds$\\
+	Posso definizione di parametrizzazione eqauivalente, $\phi$ è biunivoca, cioè sempre crescente o sempre decrescente.\
+	Supponiamo $\phi'(s) > 0$ per ogni $s \in [c,d]$.\\
+	Allora lunghezza$(\delta) = \int_c^d \left\lVert \underline{r}'(\phi(s))\right\rVert  \cdot \phi'(s) ds$.\\
+	Cambio di variabile nell'integrale $t=\phi(s)$ e $dt = \phi'(s) ds$\\
+	\begin{equation}
+		\int_a^b \left\lVert \underline{r}'(t) \right\rVert dt = \textnormal{lunghezza}(\gamma)
+	\end{equation}
+\end{dimostrazione}
+
+
+
+\begin{thm} \textbf{Differenziabile implica continua}\\
+	Siano $A \subseteq \mathbb{R}^2$ aperto, $\underline{x}_0 \in A$ e $f: A \to \mathbb{R}$ differenziabile in $\underline{x}_0$.\\
+	Allora $f$ è continua in $\underline{x}_0$.
+\end{thm}
+
+\begin{dimostrazione}
+	\emph{\textbf{da sapere all'esame}}\\
+	Dobbiamo dimostrare che: $\lim_{\underline{x} \to \underline{x}_0} f(\underline{x}) = f(\underline{x}_0)$\\
+	Essendo $f$ differenziabile in $\underline{x}_0$:\\
+	\begin{equation}
+		f(\underline{x}) - f(\underline{x}_0) = \langle \nabla f(\underline{x}_0), \underline{x} - \underline{x}_0 \rangle + o(\left\lVert \underline{x} - \underline{x}_0\right\rVert )
+	\end{equation}
+	\begin{equation}
+		\left\lvert f(\underline{x}) - f(\underline{x}_0) \right\rvert = \left\lvert \langle \nabla f(\underline{x}_0), \underline{x} - \underline{x}_0 \rangle + o(\left\lVert \underline{x} - \underline{x}_0\right\rVert )\right\rvert 
+	\end{equation}
+
+	disuguaglianza triangolare: $\leq | \left\langle \nabla f(\underline{x}_0), \underline{x} - \underline{x}_0 \right\rangle | +  o(\left\lVert \underline{x} - \underline{x}_0 \right\rVert ) $\\
+
+	Cauchy-Schwarz: $\leq \left\lVert \nabla f(\underline{x}_0) \right\rVert \cdot \left\lVert \underline{x} - \underline{x}_0 \right\rVert + o(\left\lVert \underline{x} - \underline{x}_0 \right\rVert )$\\
+
+	Quindi:
+	\begin{equation}
+		\lim_{\underline{x} \to \underline{x}_0} \left\lvert f(\underline{x}) - f(\underline{x})\right\rvert = 0
+	\end{equation}
+
+	cioè
+	\begin{equation}
+		\lim_{\underline{x} \to \underline{x}_0} f(\underline{x}) = f(\underline{x}_0)
+	\end{equation}
+\end{dimostrazione}
+
+% schema in blu di riassunto todo
+
+
+
+\begin{thm} \textbf{Formula del gradiente}\\
+	$A \subseteq \mathbb{R}^2$ aperto, $\underline{x}_0 \in A$ e $f: A \to \mathbb{R}$ differenziabile in $\underline{x}_0$.\\
+	Allora $f$ ammette derivate direnzionali in ogni direzione $\underline{v}$ e inoltre
+	\begin{equation}
+		\frac{\partial f}{\partial \underline{v}} (\underline{x}_0) = \langle \nabla f(\underline{x}_0), \underline{v} \rangle
+	\end{equation}
+\end{thm}
+\begin{dimostrazione}
+	\emph{\textbf{da sapere all'esame}}\\
+	Devo dimostrare che 
+	\begin{equation}
+		\lim_{t \to 0} \frac{f(\underline{x}_0 +t\underline{v})-f(\underline{x}_0)}{t} = \langle \nabla f(\underline{x}_0), \underline{v} \rangle
+	\end{equation}
+	Scelgo $\underline{h} = t \underline{v}$ nella definizione di differenziabilità:
+	\begin{equation}
+		f(\underline{x}_0 +t\underline{v})-f(\underline{x}_0) = \langle \nabla f(\underline{x}_0), t \underline{v} \rangle + o(\left\lVert t\underline{v}\right\rVert )
+	\end{equation}
+	Divido per $t$ e faccio il limite $t \to 0$:
+	\begin{equation}
+		\lim_{t \to 0} \frac{f(\underline{x}_0 +t\underline{v})-f(\underline{x}_0)}{t} = \langle \nabla f(\underline{x}_0), \underline{v} \rangle
+	\end{equation}
+	% importante manca qualche calcolo, va bene comunque? todo
+\end{dimostrazione}
+
+
+
+
+
+\begin{thm} \textbf{ortogonalità del gradiente alle curve di livello} ovvero direzione di crescita nulla\\
+	Sia $A \subseteq \mathbb{R}^2$ aperto, $\underline{x}_0 \in A$ e $f: A \to \mathbb{R}$ differenziabile in $A$. L'insieme di livello $I_k$ è il sostegno di una curva regolare $\underline{r}$.\\
+	Allora:
+	\begin{equation}
+		\langle \nabla f(\underline{r}(t)), \underline{r}'(t) \rangle = 0 \quad \forall t
+	\end{equation}
+\end{thm}
+% Spiegazione: questo teorema dice 2 cose:
+% \begin{enumerate}
+% 	\item[$i)$] se $\nabla f(\underline{x}_0) \neq 0$ allora $\nabla f(\underline{x}_0)\perp$ curva di livello passante per $\underline{x}_0$.
+% 	\item[$ii)$] grazie alla formula del gradiente:
+% 		\begin{equation}
+% 			0 = \langle \nabla f(\underline{r}(t)), \underline{r}'(t) \rangle = \frac{\partial f}{\partial \underline{v}} (\underline{r}(t)) \quad  \textnormal{con } \underline{v} = \underline{r}'(t)
+% 		\end{equation} 
+% 		cioè la derivata direnzionale di $f$ nella direzione tangente alla curva di livello è nulla.
+% \end{enumerate}
+
+\begin{dimostrazione}
+	\emph{\textbf{da sapere all'esame}}\\
+	Per ipotesi $I_k$ coincide con il sostegno della curva regolare $\underline{r}(t)$, cioè:
+	\begin{equation}
+		I_k = \{ \underline{r}(t), t \in J \}
+	\end{equation}
+	In particolare $f(\underline{r}(t)) = k$ per ogni $t \in J$.\\
+	Chiamo $F:J\to \mathbb{R}$ la funzione composta $F(t) = f(\underline{r}(t)) = f \circ \underline{r}(t)$.\\
+	Da un lato $F(t) = k \quad \forall t \Rightarrow F'(t) = 0 \quad \forall t$.\\
+	D'altro lato, per il teorema di derivazione della funzione composta:
+	\begin{equation}
+		F'(t) = \langle \nabla f(\underline{r}(t)), \underline{r}'(t) \rangle \longrightarrow \langle \nabla f(\underline{r}(t)), \underline{r}'(t) \rangle = 0
+	\end{equation}
+\end{dimostrazione}
+
+
+
+
+
+\begin{thm} \textbf{Classificazione dei punti critici: Criterio della matrice Hessiana}\\
+	$A \subseteq \mathbb{R}^2$ aperto, $f \in C^2(A)$.\\
+	$\underline{x}_0 = (x_0, y_0) \in A$ punto critico di $f$ allora.\\
+	Denotiamo $q$ la fomra quadratica indotta da $H_f(\underline{x}_0)$, cioè:
+	\begin{equation}
+		q(h_1,h_2) = (h_1, h_2) \cdot H_f(\underline{x}_0) \cdot \begin{pmatrix} h_1 \\ h_2 \end{pmatrix}
+	\end{equation}
+	Allora:
+	\begin{enumerate}
+		\item[$i)$] Se $q$ è definita positiva allora $\underline{x}_0$ è punto di minimo.
+		\item[$ii)$] Se $q$ è definita negativa allora $\underline{x}_0$ è punto di massimo.
+		\item[$iii)$] Se $q$ è indefinita allora $\underline{x}_0$ è punto di sella.  
+	\end{enumerate}
+\end{thm}
+\emph{Oss:} Se $q$ è indefinita il criterio della matrice Hessiana non da informazioni.
+\begin{dimostrazione}
+	\emph{\textbf{da sapere all'esame}}\\
+	Essendo $\nabla f(\underline{x}_0) = \underline{0}$, la formula di Taylor al secondo ordine diventa
+	\begin{equation}
+		f(\underline{x}_0 + \underline{h}) = f(\underline{x}_0) + \frac{1}{2} q(\underline{h}) + o(\left\lVert \underline{h} \right\rVert^2)
+	\end{equation}
+	\begin{enumerate}
+		\item[$i)$] Se $q$ è definita positiva, cioè $q(\underline{h})>0 \quad \forall \underline{h}$
+			\begin{itemize}
+				\item $f(\underline{x}_0 + \underline{h}) > f(\underline{x}_0) + o(\left\lVert \underline{h} \right\rVert^2)$
+				\item in una palletta $f(\underline{x}_0 + \underline{h}) > f(\underline{x}_0)$
+				\item $\underline{x}_0$ è punto di minimo locale
+			\end{itemize}
+		\item[$ii)$] Se $q$ è definita negativa, cioè $q(\underline{h})<0 \quad \forall \underline{h}$
+			\begin{itemize}
+				\item $f(\underline{x}_0 + \underline{h}) < f(\underline{x}_0) + o(\left\lVert \underline{h} \right\rVert^2)$
+			\end{itemize}
+		\item[$iii)$] Se $q$ è indefinita, cioè $\exists \underline{h}_p, \underline{h}_n$ t.c. $q(\underline{h}_p)>0$ e $q(\underline{h}_n)<0$
+			\begin{itemize}
+				\item $f(\underline{x}_0 + \underline{h}_p) > f(\underline{x}_0) + o(\left\lVert \underline{h}_p \right\rVert^2)$
+				\item $f(\underline{x}_0 + \underline{h}_n) < f(\underline{x}_0) + o(\left\lVert \underline{h}_n \right\rVert^2)$
+				\item $\underline{x}_0$ è punto di sella
+			\end{itemize}
+	\end{enumerate}
+	% todo importante dimostrazione
+
+\end{dimostrazione}
+
+
+
+
+% lezione 14-12-2022
+\begin{thm} \textbf{la trasf. in coordinate sferiche}\\
+\begin{equation}
+	\begin{cases}
+		T_1(r, \phi, \theta) = r \sin\phi\cos\theta\\
+		T_2(r, \phi, \theta) = r \sin\phi\sin\theta\\
+		T_3(r, \phi, \theta) = r \cos\phi
+	\end{cases} \quad \textnormal{con } \phi \in (0,\pi) \textnormal{ e } \theta \in [0,2\pi)
+	\end{equation}
+	Ha determinante Jacobiano:
+	\begin{equation}
+		det J(r, \phi, \theta) = r^2 \sin\phi \quad (\textnormal{sempre} > 0)
+	\end{equation}
+
+\end{thm}
+\begin{dimostrazione} 
+	\emph{\textbf{da sapere all'esame}}\\ %todo formattazione
+	\begin{equation}
+		J(r,\phi,\theta) = \begin{pmatrix}
+			\frac{\partial T_1}{\partial r} & \frac{\partial T_1}{\partial \phi} & \frac{\partial T_1}{\partial \theta}\\
+			\frac{\partial T_2}{\partial r} & \frac{\partial T_2}{\partial \phi} & \frac{\partial T_2}{\partial \theta}\\
+			\frac{\partial T_3}{\partial r} & \frac{\partial T_3}{\partial \phi} & \frac{\partial T_3}{\partial \theta}
+		\end{pmatrix}
+	\end{equation}
+	\begin{equation}
+		= \begin{pmatrix}
+			\sin\phi\cos\theta & r\cos\phi\cos\theta & -r\sin\phi\sin\theta\\
+			\sin\phi\sin\theta & r\cos\phi\sin\theta & r\sin\phi\cos\theta\\
+			\cos\phi & -r\sin\phi & 0
+		\end{pmatrix}
+	\end{equation}
+	Sviluppo il determinante sull'ultima riga:
+	\begin{multline} 
+	   det J(r,\phi,\theta) = \cos\phi\left[r^2 \cos\phi\sin\phi\cos^2\theta   + r^2 \cos\phi\sin\phi\sin^2\theta\right] +   \\  r\sin\phi\left[r\sin^2\phi\cos^2\theta + r\sin^2\phi\sin^2\theta\right]
+	\end{multline}
+	\begin{equation}
+		= \cos\phi \cdot \cos^2\phi\sin\phi+r^2\sin^2\phi\sin\phi
+	\end{equation}
+	\begin{equation}
+		= r^2 \sin\phi
+	\end{equation}
+\end{dimostrazione}
+\emph{Oss:} È un cambio di variabili ammissibile nell'integrale perché $(T_1,T_2,T_3)$ di classe $C^1$ e biunivoca tra gli aperti e inoltre $det J(r,\phi,\theta) \neq 0 \quad \forall (r,\phi,\theta)$
+
+
+
+\end{multicols}
+\end{document}
