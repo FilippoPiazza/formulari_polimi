@@ -1,1 +1,455 @@
+\documentclass[10pt,landscape, a4paper]{scrartcl} %article
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage{pgfplots}			% grafici
+\usepackage{imakeidx}			% indice			
+\usepackage{array}				% matrici
+\usepackage{mathtools}			% matematica		
+\usepackage{chngcntr}			% counter per gli esercizi
+\usepackage{multicol}			% colonne multiple
+\usepackage[italian]{babel}
 
+
+% Impostazioni grafici pgfplots, altrimenti si lamenta
+\pgfplotsset{compat=1.18}
+
+\mathtoolsset{showonlyrefs}
+
+% Definizione dell'ambiente "Definizione"
+\newtheorem{defn}{Definizione}
+\newenvironment{definition}{\begin{mdframed}[backgroundcolor=Ivory2]\begin{defn}}{\end{defn}\end{mdframed}}
+
+% Definizione dell'ambiente "Teorema"
+\newtheorem{teorema}{Teorema}
+\newenvironment{thm}{\begin{mdframed}[backgroundcolor=white]\begin{teorema}}{\end{teorema}\end{mdframed}}
+
+% Definizione dell'ambiente "Dimostrazione"
+\newtheorem{demnstrn}{Dimostrazione}
+\newenvironment{dimostrazione}{\begin{mdframed}[backgroundcolor=white]\begin{demnstrn}}{\end{demnstrn}\end{mdframed}}
+
+
+
+\pdfinfo{
+  /Title (example.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Seamus)
+  /Subject (Example)
+  /Keywords (pdflatex, latex,pdftex,tex)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=0.5cm,left=.5cm,right=.5cm,bottom=.5cm} }
+        {\geometry{top=.5cm,left=.5cm,right=.5cm,bottom=.5cm} }
+    }
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+%My Environments
+\newtheorem{example}[section]{Example}
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols*}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+%\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\section*{Studio sistema}
+\subsection{Classificazione}
+\begin{enumerate}
+	\item Numero di input e output: SISO, MISO, SIMO, MIMO
+	\item Strettamente proprio: $y(t) = g(x(t), t)$ovvero non compare $u$ null'uscita.
+	\item Proprio: $y(t) = g(u(t), t)$
+	\item Tempo invariante (stazionario): $y(t) = g(u(t))$ non dipende da $t$. Altrimenti tempo variante.
+	\item Lineare: combinazioni lineari di $u$ e $x$. No esponeziali, prodotti o funzioni. altrimenti non lineare.
+	\item Dinamico: dipende da $x$. Ha ordine $n$ numero di $\dot x_n$. Altrimenti statico.
+	\item Ordine: numero / dimensione ingressi.
+\end{enumerate}
+
+\subsection*{Sistemi a tempo continuo}
+Ovvero nella forma $\dot x = Ax + Bu$, $y = Cx + Du$.
+
+\subsubsection*{Equilibrio}
+Cerco $y_e$ punto di equilibrio dato $u_e$ ingresso.
+\begin{enumerate}
+	\item Pongo le derivate a zero. $\dot x = 0$
+	\item Risolvo il sistema lineare. Trovo $x_1, x_2, \ldots, x_n$
+	\item Sostituisco nelle equazioni di output.
+\end{enumerate}
+Trovo $y_e$ punto di equilibrio.
+
+\subsubsection*{Linearizzazione}
+Scrivere equazione del sistema linearizzato attorno a un punto di equilibrio dato: $(\overline{x}, \overline{u})$\\
+Scrivo il sistema in forma matriciale. Avrò $A, B, C, D$ dove $A$ è $n \times n$, $B$ è $n \times m$, $C$ è $p \times n$ e $D$ è $p \times m$. In genere $p = m = 1$:
+\begin{equation}
+	A = \left. \frac{\partial f}{\partial x} \right|_{(\overline{x}, \overline{u})} \quad B = \left. \frac{\partial f}{\partial u} \right|_{(\overline{x}, \overline{u})} \quad C = \left. \frac{\partial g}{\partial x} \right|_{(\overline{x}, \overline{u})} \quad D = \left. \frac{\partial g}{\partial u} \right|_{(\overline{x}, \overline{u})}
+\end{equation}
+Avrò quindi:
+\begin{equation}
+	\begin{cases}
+		\delta \overline{x} = A\delta \overline{x} + B\delta u\\
+		\delta \overline{y} = C\delta \overline{x} + D\delta u
+	\end{cases}
+\end{equation}
+
+\subsubsection*{Studio stabilità}
+A partire dal sistema linearizzato.
+Studio autovalori di $A$. Se hanno tutti parte reale negativa, il sistema è asintoticamente stabile.
+
+\subsubsection*{Funzione di trasferimento}
+Due modi per trovarla:
+\begin{equation}
+	G(s) = C(sI - A)^{-1}B + D
+\end{equation}
+Oppure:\\
+Sostituisco le derivate $\dot x_i$ con $sX_i$ e risolvo il sistema lineare: $y = G(s)u$.\\
+Il sistema si risolve in genere per sostituzione.\\
+NB: (se c'è un $\alpha$) se serve valutare oss. e ragg. bisogna controllare gli autovalori positivi e cercare di eliminarli (semplificare numeratore e denominatore).
+
+\subsubsection*{Studio ossevabilità e raggiungibilità}
+Osservabilità:\\
+\begin{equation}
+	M_O = \left[[C] [A\cdot C] [A^{2}\cdot C]\cdots [A^{n-1} \cdot C]\right]^T
+\end{equation}
+(in verticale)\\
+Se il determinante di $M_O$ è diverso da zero, il sistema è ossevabile.\\
+
+Raggiungibilità:\\
+\begin{equation}
+	M_R = \left[[B] [A\cdot B] [A^{2}\cdot B] \cdots [A^{n-1} \cdot B]\right]
+\end{equation}
+Se il determinante di $M_R$ è diverso da zero, il sistema è raggiungibile.\\
+
+Per entrambi, se il n. poli = ordine, allora il sistema è ossevabile e raggiungibile.
+
+\subsubsection*{Guadagno statico}
+Studia stabilità. Se as. stabile, il guadagno statico è il rapporto tra l'uscita e l'ingresso a regime, ovvero il $G(s)$ in $y = G(s)u$.
+
+\subsubsection*{Calcolo risposta analitica (modi)}
+Risposta libera significa $u = 0$. L'esercizio da uno stato $x(0) = (x_1, x_2, \ldots, x_n)$.\\
+\begin{enumerate}
+	\item Calcolo autovalori di $A$.
+	\item Calcolo autovettori di $A$.
+	\item Calcolo $x(t) = \sum_{i=1}^{n} x_i e^{\lambda_i t} v_i$ ovvero la somma dei modi.
+	\item Calcolo $y(t) = Cx(t)$.
+\end{enumerate}
+
+
+% \subsubsection*{Routh}
+% Partendo dall'equazione caratteristica: $a_ns^n + a_{n-1}s^{n-1} + \ldots + a_1s + a_0 = 0$\\
+% Costruisco la tabella di Routh, alternando i coefficienti $a$ sulle prime due righe.
+
+% \begin{equation}
+% 	\begin{array}{c|c|c|c|c|c}
+% 		n 		& a_n 		& a_{n-2} 	& a_{n-4} 	& a_{n-6} 	& \ldots\\
+% 		n-1 	& a_{n-1} 	& a_{n-3} 	& a_{n-5} 	& a_{n-7} 	& \ldots\\ \hline
+% 		n-2 	& x_{n-2,1} & x_{n-4,2} & x_{n-6,3} & x_{n-8,4} & \ldots\\
+% 		n-3 	& x_{n-3,1} & x_{n-5,2} & x_{n-7,3} & x_{n-9,4} & \ldots\\
+% 		\vdots	& \vdots 	& \vdots 	& \vdots 	& \vdots 	& \vdots\\
+% 		2		& x_{2,1} 	& x_{0,2} 	& \ldots 	& 			& 		\\
+% 		1		& x_{1,1} 	& \ldots 	& 			& 			& 		\\
+% 		0		& x_{0,1} 	& 		 	& 			& 			& 
+% 	\end{array}
+% \end{equation}
+% Per valutare ogni elemento alle righe successive, uso questa formula:
+% \begin{equation}
+% 	x_{i,h} = - \frac{1}{x_{i+1,1}} \cdot \begin{vmatrix} x_{i+2,1} & x_{i+2,h+1} \\ x_{i+1,1} & x_{i+1,h+1} \end{vmatrix}
+% \end{equation}
+% Se in un una riga trovo un elemento nullo, considero nulli tutti i successivi e passo alla riga seguente.\\
+% Il risultato finale è una tabella triangolare di righe a lunghezza decrescente. L'ultima ha un solo elemento.\\
+% Se tutti gli elementi sono diversi da zero, la tabella è ben definita. Se non è ben definita, il sistema è instabile.\\
+% Il sistema è stabile se tutti gli elementi della prima colonna hanno lo stesso segno.
+
+\subsection*{Sistemi a tempo discreto}
+Ovvero nella forma $x(k+1) = Ax(k) + Bu(k)$, $y(k) = Cx(k) + Du(k)$.
+
+\subsubsection*{Equilibrio}
+Cerco $y_e$ punto di equilibrio dato $u_e$ ingresso.
+\begin{enumerate}
+	\item Pongo $x(k+1) = x(k)$
+	\item Risolvo il sistema lineare. Trovo $x_1, x_2, \ldots, x_n$
+	\item Sostituisco nelle equazioni di output.
+\end{enumerate}
+Trovo $y_e$ punto di equilibrio.
+
+\subsubsection*{Studio stabilità}
+A partire dal sistema linearizzato.
+Studio autovalori di $A$. Se hanno tutti parte reale $< 1$, il sistema è asintoticamente stabile.
+
+\subsubsection*{Linearizzazione}
+Scrivere equazione del sistema linearizzato attorno a un punto di equilibrio dato: $(\overline{x}, \overline{u})$\\
+Scrivo il sistema in forma matriciale. Avrò $A, B, C, D$ dove $A$ è $n \times n$, $B$ è $n \times m$, $C$ è $p \times n$ e $D$ è $p \times m$. In genere $p = m = 1$:
+\begin{equation}
+	A = \left. \frac{\partial f}{\partial x} \right|_{(\overline{x}, \overline{u})} \quad B = \left. \frac{\partial f}{\partial u} \right|_{(\overline{x}, \overline{u})} \quad C = \left. \frac{\partial g}{\partial x} \right|_{(\overline{x}, \overline{u})} \quad D = \left. \frac{\partial g}{\partial u} \right|_{(\overline{x}, \overline{u})}
+\end{equation}
+Avrò quindi:
+\begin{equation}
+	\begin{cases}
+		\delta x(k+1) = A\delta x + B\delta u\\
+		\delta y = C\delta x + D\delta u
+	\end{cases}
+\end{equation}
+
+\subsubsection*{Calcolo movimento libero uscita (modi)}
+Movimento libero significa $u = 0$. L'esercizio da uno stato $x(0) = (x_1, x_2, \ldots, x_n)$.\\
+\begin{enumerate}
+	\item Calcolo autovalori di $A$.
+	\item Calcolo autovettori di $A$.
+	\item Calcolo $x(t) = \sum_{i=1}^{n} x_i \lambda_i^{k} v_i$ ovvero la somma dei modi.
+	\item Calcolo $y(t) = Cx(t)$.
+\end{enumerate}
+
+\section*{Associare grafico al sistema}
+\begin{enumerate}
+	\item $Re(\lambda) = 0$ oscillazioni costanti.
+	\item $Re(\lambda) > 0$ diverge.
+	\item $Re(\lambda) < 0$ converge quindi studio tempo dominante e assestamento (vedi andamento qualitativo).
+\end{enumerate}
+
+
+Il numeratore influenza l'ampiezza della risposta.
+\begin{enumerate}
+	\item poli reali negativi: risposta smorzata esponenzialmente.
+	\item poli complessi coniugati: oscillazioni smorzate.
+	\item Poli puramente immaginari: oscillazioni non smorzate.
+	\item Poli reali positivi: risposta crescente esponenzialmente.
+\end{enumerate}
+
+
+
+\section*{Risposta analitica a impulso unitario (Heaviside)}
+Dato un $G(s) = \frac{N(s)}{D(s)}$ con $N(s)$ e $D(s)$ polinomi.\\
+\begin{enumerate}
+	\item Sviluppo di $G(s)$ in fratti semplici: (NB i poli uguali appaiono una volta per ogni molteplicità)
+	\begin{equation}
+		G(s) = \frac{N(s)}{D(s)} = \sum_{i=1}^{n} \frac{P_i}{(s - \lambda_i)}
+	\end{equation}
+	\item Calcolo i $P_i$: Sostituisco $s = \lambda_i$ in $\frac{N(s)}{Q(s)}$ dove $Q(s)$ è il polinomio che rimane dopo aver rimosso il termine $(s - \lambda_i)$ da $D(s)$.
+	\item Se non si può calcolare come sopra, eguaglio $\sum_{i=1}^{n} P_i\cdot Q_i(s) = N(s)$ e risolvo il sistema lineare e sostituisco $s$ tale che sia diverso da tutti i $\lambda_i$.
+	\item Sostituisco i $P_i$ in $G(s)$.
+	\item Calcolo la trasformata inversa di $G(s)$, ovvero i termini del tipo $\frac{P_i}{s - \lambda_i} \rightarrow P_i\cdot e^{\lambda_i t}$.
+\end{enumerate}
+\begin{equation}
+	f(t) = \left(\sum_{i=1}^{n} P_i\cdot e^{\lambda_i t}\right)sca(t)
+\end{equation}
+
+
+
+
+
+\section*{Schemi a blocchi}
+Serie: $G(s) = G_1(s)\cdot G_2(s)$\\
+Parallelo: $G(s) = G_1(s) + G_2(s)$\\
+Retroazione negativa: $G(s) = \frac{G_1(s)}{1 + G_1(s)G_2(s)}$\\
+Retroazione positiva: $G(s) = \frac{G_1(s)}{1 - G_1(s)G_2(s)}$\\
+Per lo studio di stabilità, si possono ignorare i blocchi in retroazione.
+
+\section*{Andamento qualitativo}
+Data una funzione di trasferimento $G(s)$\\
+Il polo dominante è quello con la parte reale maggiore.\\
+NB se negativo, il polo dominante ha il valore assoluto minore.\\
+\begin{enumerate}
+	\item valore finale: $y_{\infty} = \lim_{s \to 0} s\cdot G(s)$
+	\item valore iniziale: $y(0) = \lim_{s \to \infty} s\cdot G(s)$
+	\item derivata iniziale: $\dot y(0) = \lim_{s \to \infty} s^2\cdot G(s)$
+	\item tempo dominante: $\tau = \left| \frac{1}{\Re(\lambda)}\right|$ dove $\lambda$ è il polo dominante.
+	\item tempo di assestamento: al $99\%$ è $5\tau$ (sarebbe $4.6\tau$), al $95\%$ è $3\tau$.
+	\item Sovraelongazione percentuale: $S\% = e^{\frac{-\xi \pi}{\sqrt{1 - \xi^2}}} = \frac{Max - y_\infty}{y_\infty} \cdot 100$\\
+			Ovvero il punto di massimo in che percentuale sfora il valore finale.
+	\item Se $\mu = e^{-k s}$ allora il ritardo $\tau_r = k$, quindi nel disegno la funzione parte da $k$.
+	\item Studio gli zeri:
+	 \begin{multicols*}{2}
+		\begin{enumerate}
+			\item zero positivo
+			\item zero negativo più vicino all'origine del piano complesso rispetto ai poli
+			\item zero negativo più lontano dall'origine del piano complesso rispetto ai poli
+		\end{enumerate} \includegraphics*[width=1\columnwidth]{zeri.png}
+	 \end{multicols*}
+
+	\item Se ho poli complessi coniugati, studio $\xi = \frac{\Re(\lambda)}{|\lambda|}$
+	    \begin{multicols*}{2}
+			\begin{enumerate}
+			\item $\xi < 0.5$
+			\item $\xi = 0.5$
+			\item $\xi > 0.5$
+		\end{enumerate} \includegraphics*[width=1\columnwidth]{xi.png}
+		\end{multicols*}
+		
+\end{enumerate}
+Disegno il grafico con multipli di $\tau$ su asse $x$ i valori di $y$ su asse $y$.\\
+Se chiede andamento qualitativo a $sca$ allora i valori finali e iniziali devono essere moltiplicati per $\frac{1}{s}$. Se $Ram$ allora per $\frac{1}{s^2}$.
+
+
+
+\section*{Disegno diagrammi di Bode}
+Viene fornita una funzione di trasferimento $G(s)$.
+\begin{enumerate}
+	\item trasformo la funzione nella forma: $G(s) = \frac{\mu}{s^m}\cdot \frac{\prod_{i=1}^{n} (s + z_i)}{\prod_{i=1}^{n} (s + p_i)}$
+	\item trovo zeri, poli e $\mu$ guadagno statico.
+	\item Per il diagramma di modulo:
+		\begin{itemize}
+			\item Popolo gli assi: in generale l'ordine di grandezza del primo polo o zero lo colloco nella terza decade. Su asse $y$ metto $\alpha_{dB}$ poco sopra la metà.
+			\item Tipo di funzione: 0 se $m = 0$, 1 se $m = 1$, 2 se $m \geq 2$.
+			\item Posizione iniziale: $\alpha_{dB} = 20\log_{10} (\mu)$.
+			\item metto un punto in $(\lambda_1, \alpha_{dB})$ con $\lambda_1$ polo o zero più piccolo.
+			\item Traccio una retta con pendenza $20\cdot m$ dB/decade verso sinistra.
+			\item Proseguo verso destra e ogni polo o zero mi fa cambiare pendenza. Se zero sale, se polo scende.
+		\end{itemize}
+	\item Per il diagramma di fase:
+		\begin{itemize}
+			\item Copio asse $x$ da sopra, asse $y$ centro il valore di $\varphi$.
+			\item fase iniziale $\varphi = - m \cdot 90 + k$ con $k = -180$ se $\mu < 0$, $k = 0$ altrimenti.
+			\item Traccio una retta orizzontale fino al primo polo o zero.
+			\item Ogni polo o zero mi fa cambiare di $90$ gradi. Se $z^+$ scende, se $p^+$ sale, se $z^-$ sale, se $p^-$ scende.
+			\item Traccio curva reale approssimata. (per Nyquist)
+					NB: se smorzamento $\xi < \frac{1}{sqrt{2}}$ allora sui cambi di modulo la funzione reale ha un picco di risonanza. (ovvero sfora)
+		\end{itemize}
+\end{enumerate}
+P.S.: Se c'è complesso coniugato, i due poli sono la radice del coefficiente di $s^0$
+
+\section*{Disegno diagrammi di Nyquist}
+Diagramma polare. L'esercizio fornisce una funzione di trasferimento $G(s) = \frac{\mu}{s^g}\cdot \frac{\prod_{i=1}^{n} (s + z_i)}{\prod_{i=1}^{n} (s + p_i)}$.\\
+Regole di tracciamento:
+\begin{itemize}
+	\item Costruzione di Bode.
+	\item Se $g = 0$ allora il punto di partenza è $(\mu,0)$.
+	\item Se $g < 0$ allora il punto di partenza è l'origine.
+	\item Se $g > 0$ allora il punto di partenza è l'infinito.
+	\item La funzione abbandona l'asse reale sempre ortogonalmente.
+	\item Se numero di poli - numero di zeri $>0$ allora il punto di arrivo è l'origine.
+\end{itemize}
+Per disegnare il diagramma, utilizzo la fase di Bode come angolo e il modulo come raggio (coordinate polari).
+
+\section*{Criteri di stabilità} % bode, nyquist, piccola fase
+Dato un sistema. Se bisogna scegliere, si fa Nyquist.
+
+\subsection*{Criterio di Nyquist}
+Il sistema è asintoticamente stabile se $N = P$ con $N$
+numero di poli a parte reale positiva e $P$ numero di giri antiorari del diagramma di Nyquist.
+Studio stabilità $\forall$ intervallo di $\frac{-1}{k}$ e poi passo a $k$.\\
+Esempio:
+$-0,5 < -\frac{1}{k} < 0 \Rightarrow k > 2$
+
+\subsection*{Criterio di Bode}
+Condizioni per poter applicare il criterio di Bode:
+\begin{enumerate}
+	\item Numero di poli a parte reale positiva è zero.
+	\item $w_c$ è unica ovvero passa una sola volta per $0 dB$.
+	\item La funzione di trasferimento è strettamente propria.
+\end{enumerate}
+Se è applicabile, il sistema è asintoticamente stabile se $\mu > 0$ e $\varphi_m > 0$.
+
+\section*{Risposta in frequenza}
+Margine di guadagno: $MG = \frac{1}{|L(j\omega_\pi)|}$\\
+Margine di fase: $\varphi_m = 180 + \arg(L(j\omega_\pi))$\\
+Il margine di fase è quanti gradi mancano a $-180^{\circ}$.\\
+$\omega_c$ è il punto in cui il modulo di $L(j\omega)$ passa per $0 dB$.\\
+\colorbox{yellow}{Si può calcolare dal diagramma di Bode:}\\ $|L(j\omega)| = 0 dB$ e $\arg(L(j\omega)) = -180^{\circ}$.
+
+\section*{Regolatore}
+L'esercizio fornisce una funzione di trasferimento $G(s)$ con uno schema di controllo e delle specifiche.\\
+Ogni specifica mi da un vincolo su $G(s)$.
+
+\subsection*{Studio vincoli}
+\begin{itemize}
+	\item Attenuazione ampiezza $n(t) = sin(\omega_n\cdot t)$ inferiore a $-15 dB$.\\
+		$|L(j\omega)| < -15 dB$.
+	\item Attenuazione ampiezza $d(t) = sin(\omega_d\cdot t)$ inferiore a $-15 dB$.\\
+		$|L(j\omega)| > 15 dB$.
+	\item Banda passante in anello chiuso $B > 10 rad/s$.\\
+		$\omega_c > 10$.
+	\item Ampiezza segnale $y(t)$ a fronte di ingressi $d(t) = 5sin(\omega_d \cdot t)$ inferiore a $0.1$.\\
+		$|S(j\omega)| \cdot 5 < 0.1$ ovvero $|L(j\omega)| > 50 dB$.
+	\item Margine di fase superiore a $60^{\circ}$.\\
+		$\varphi_m > 60^{\circ}$.
+	\item Attenuazione $w(t) = sin (\omega_w \cdot t)$ superiore a $-3 dB$ $[0,20]$.\\
+		$\omega_b \geq 20 \Rightarrow \omega_c > 20$.
+	\item $|e(t)| < 0.11$ a trans.es.a fronte di $w(t) = (6 + 6sin(\omega_w \cdot t)) sca(t)$ e $n(t) = \frac{2}{6} cos(\omega_n \cdot t) sca(t)$ e $\omega_n \geq 1$
+		\begin{enumerate}
+			\item $6|S(j\omega)| < 0.1 \Rightarrow \frac{6}{|L(j\omega)|} < 0.1 \Rightarrow |L(j\omega)| > 60 dB$
+			\item $\frac{2}{6}|F(j\omega)| < 0.01 \Rightarrow \frac{2}{6}|L(j\omega)| < 0.01 \Rightarrow |L(j\omega)| > \frac{3}{100} dB$
+		\end{enumerate}		
+	\item Sovraelongazione percentuale nella risposta a scalino inferiore al $25\%$\\
+		$S\% < 25\% \Rightarrow e^{\frac{-\xi \pi}{\sqrt{1 - \xi^2}}} < 0.25$.\\
+		$\xi \pi > ln(0.25) \cdot \sqrt{1 - \xi^2} \Rightarrow \xi > \frac{ln(0.25)}{\sqrt{\pi^2 + |ln(0.25)|^2}} \simeq 0.404$\\
+		$\varphi_m > 40^{\circ}$.
+	\item Se ho un vincolo del tipo $|e_\infty| = Ram(t)$ o $|e_\infty| = sca(t)$ allora l'ordine di $L(s)$ è $g+1$. 
+	\item Tempo di assestamento inferiore a 2 unità di tempo.\\
+		Se $\varphi_m > 75^{\circ}$ allora $\frac{1}{\omega_c} < 2$ quindi $\omega_c > 0.5$.\\
+		Se $\varphi_m \leq 75^{\circ}$ allora $\frac{1}{\omega_c \cdot \xi} < 2$ quindi $\omega_c > \frac{0.5}{\xi}$ dato che $\xi = \frac{\varphi_m}{100}$ allora $\omega_c = 0.8$.
+\end{itemize}
+\begin{equation}
+	\begin{array}{|c|c|c|c|}
+	\hline
+	|e_\infty|  & \frac{A}{S}    & \frac{A}{S^2}  & \frac{A}{S^3} \\ \hline
+	g=0  & \frac{A}{1+u}  & \infty         & \infty       \\ \hline
+	g=1  & 0              & \frac{A}{u}    & \infty       \\ \hline
+	g=2  & 0              & 0              & \frac{A}{u}  \\ \hline
+	\end{array}
+\end{equation}
+\begin{itemize}
+	\item \textbf{NB} se ho due vincoli su $e_\infty$ ma uno è $sca$ e l'altro è $ram$, allora ignoro il $sca$.
+	\item $|e_\infty| \leq 0.5$ con $w(t) = 8 Par(t)$\\
+			$\frac{8}{u} < 0.5$ quindi $u > 16$ e $g=2$.
+	\item $|e_\infty| \leq 0.5$ con $w(t) = 8 Sca(t)$\\
+			$\frac{8}{1+u} < 0.5$ quindi $u > 15$ e $g=0$.
+	\item $|e_\infty| \leq 0.5$ con $w(t) = 8 Ram(t)$\\
+		$\frac{8}{u} < 0.5$ quindi $u > 16$ e $g=1$.
+	\item $|e_\infty| = 0$ allora $g + 1$.
+\end{itemize}
+
+\subsection*{Progetto per inversione}
+\begin{enumerate}
+	\item Sul diagramma di Bode, disegno i vincoli ottenui dalle specifiche.
+	\item Scelgo una $L(s)$ che rispetti i vincoli (disegnandola sul diagramma).
+	\item Calcolo $R(s) = L(s) \cdot G(s) ^{-1}$.
+\end{enumerate}
+
+\end{multicols*}
+\end{document}
