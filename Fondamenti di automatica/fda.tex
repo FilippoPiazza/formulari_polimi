@@ -323,7 +323,9 @@ NB se negativo, il polo dominante ha il valore assoluto minore.\\
 		
 \end{enumerate}
 Disegno il grafico con multipli di $\tau$ su asse $x$ i valori di $y$ su asse $y$.\\
-Se chiede andamento qualitativo a $sca$ allora i valori finali e iniziali devono essere moltiplicati per $\frac{1}{s}$. Se $Ram$ allora per $\frac{1}{s^2}$.
+Se chiede andamento qualitativo a $sca$ allora i valori finali e iniziali devono essere moltiplicati per $\frac{1}{s}$. Se $Ram$ allora per $\frac{1}{s^2}$.\\
+Margine di fase: $\varphi_m = 180 + \arg(L(j\omega_\pi))$ (distanza da $-180^{\circ}$).\\
+$\omega_c$ è il punto in cui il modulo di $L(j\omega)$ passa per $0 dB$.
 
 
 
@@ -355,9 +357,8 @@ P.S.: Se c'è complesso coniugato, i due poli sono la radice del coefficiente di
 
 \section*{Disegno diagrammi di Nyquist}
 Diagramma polare. L'esercizio fornisce una funzione di trasferimento $G(s) = \frac{\mu}{s^g}\cdot \frac{\prod_{i=1}^{n} (s + z_i)}{\prod_{i=1}^{n} (s + p_i)}$.\\
-Regole di tracciamento:
+Regole di tracciamento, dato diagramma di Bode:
 \begin{itemize}
-	\item Costruzione di Bode.
 	\item Se $g = 0$ allora il punto di partenza è $(\mu,0)$.
 	\item Se $g < 0$ allora il punto di partenza è l'origine.
 	\item Se $g > 0$ allora il punto di partenza è l'infinito.
@@ -370,8 +371,8 @@ Per disegnare il diagramma, utilizzo la fase di Bode come angolo e il modulo com
 Dato un sistema. Se bisogna scegliere, si fa Nyquist.
 
 \subsection*{Criterio di Nyquist}
-Il sistema è asintoticamente stabile se $N = P$ con $N$
-numero di poli a parte reale positiva e $P$ numero di giri antiorari del diagramma di Nyquist.
+Il sistema è asintoticamente stabile se $N = P$ con $P$
+numero di poli a parte reale positiva e $N$ numero di giri antiorari del diagramma di Nyquist.
 Studio stabilità $\forall$ intervallo di $\frac{-1}{k}$ e poi passo a $k$.\\
 Esempio:
 $-0,5 < -\frac{1}{k} < 0 \Rightarrow k > 2$
@@ -385,12 +386,12 @@ Condizioni per poter applicare il criterio di Bode:
 \end{enumerate}
 Se è applicabile, il sistema è asintoticamente stabile se $\mu > 0$ e $\varphi_m > 0$.
 
-\section*{Risposta in frequenza}
+\section*{Risposta in frequenza / transitorio esaurito}
 Margine di guadagno: $MG = \frac{1}{|L(j\omega_\pi)|}$\\
-Margine di fase: $\varphi_m = 180 + \arg(L(j\omega_\pi))$\\
-Il margine di fase è quanti gradi mancano a $-180^{\circ}$.\\
-$\omega_c$ è il punto in cui il modulo di $L(j\omega)$ passa per $0 dB$.\\
-\colorbox{yellow}{Si può calcolare dal diagramma di Bode:}\\ $|L(j\omega)| = 0 dB$ e $\arg(L(j\omega)) = -180^{\circ}$.
+Trasformo $u(t)$ in $y(t)$: i numeri diventano coeff. di $u$ e $\kappa sin(\alpha t + \beta)$ diventa $\kappa |G(j\alpha)|sin(\alpha t + \beta + \arg(G(j\alpha)))$. Analogamente per $cos$.\\
+Posso calcolare $|G(j\alpha)|$ oppure prenderlo dal diagramma di Bode $10^{\frac{val}{20}}$\\
+Attenzione a sovraelongazione.
+
 
 \section*{Regolatore}
 L'esercizio fornisce una funzione di trasferimento $G(s)$ con uno schema di controllo e delle specifiche.\\
