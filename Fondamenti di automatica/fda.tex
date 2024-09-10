@@ -110,6 +110,7 @@
 	\item Lineare: combinazioni lineari di $u$ e $x$. No esponeziali, prodotti o funzioni. altrimenti non lineare.
 	\item Dinamico: dipende da $x$. Ha ordine $n$ numero di $\dot x_n$. Altrimenti statico.
 	\item Ordine: numero / dimensione ingressi.
+	\item Ingresso limitata in ampiezza corrisponde a uscita limitata in ampiezza $=$ BIBO stabile $\Leftarrow$ sistema asintoticamente stabile.
 \end{enumerate}
 
 \subsection*{Sistemi a tempo continuo}
@@ -119,7 +120,7 @@ Ovvero nella forma $\dot x = Ax + Bu$, $y = Cx + Du$.
 Cerco $y_e$ punto di equilibrio dato $u_e$ ingresso.
 \begin{enumerate}
 	\item Pongo le derivate a zero. $\dot x = 0$
-	\item Risolvo il sistema lineare. Trovo $x_1, x_2, \ldots, x_n$
+	\item Risolvo il sistema. Trovo $x_1, x_2, \ldots, x_n$
 	\item Sostituisco nelle equazioni di output.
 \end{enumerate}
 Trovo $y_e$ punto di equilibrio.
@@ -140,7 +141,7 @@ Avrò quindi:
 
 \subsubsection*{Studio stabilità}
 A partire dal sistema linearizzato.
-Studio autovalori di $A$. Se hanno tutti parte reale negativa, il sistema è asintoticamente stabile.
+Studio autovalori di $A$. Se hanno tutti parte reale negativa, il sistema è asintoticamente stabile. Se $=0$ semplicemente stabile.
 
 \subsubsection*{Funzione di trasferimento}
 Due modi per trovarla:
@@ -169,7 +170,8 @@ Se il determinante di $M_R$ è diverso da zero, il sistema è raggiungibile.\\
 Per entrambi, se il n. poli = ordine, allora il sistema è ossevabile e raggiungibile.
 
 \subsubsection*{Guadagno statico}
-Studia stabilità. Se as. stabile, il guadagno statico è il rapporto tra l'uscita e l'ingresso a regime, ovvero il $G(s)$ in $y = G(s)u$.
+Studia stabilità. Se as. stabile, il guadagno statico è il rapporto tra l'uscita e l'ingresso a regime, ovvero il $G(s)$ in $y = G(s)u$.\\
+Si calcola come $G(s)$ ma $x_1' = x_1$
 
 \subsubsection*{Calcolo risposta analitica (modi)}
 Risposta libera significa $u = 0$. L'esercizio da uno stato $x(0) = (x_1, x_2, \ldots, x_n)$.\\
@@ -213,14 +215,14 @@ Ovvero nella forma $x(k+1) = Ax(k) + Bu(k)$, $y(k) = Cx(k) + Du(k)$.
 Cerco $y_e$ punto di equilibrio dato $u_e$ ingresso.
 \begin{enumerate}
 	\item Pongo $x(k+1) = x(k)$
-	\item Risolvo il sistema lineare. Trovo $x_1, x_2, \ldots, x_n$
+	\item Risolvo il sistema. Trovo $x_1, x_2, \ldots, x_n$
 	\item Sostituisco nelle equazioni di output.
 \end{enumerate}
 Trovo $y_e$ punto di equilibrio.
 
 \subsubsection*{Studio stabilità}
 A partire dal sistema linearizzato.
-Studio autovalori di $A$. Se hanno tutti parte reale $< 1$, il sistema è asintoticamente stabile.
+Studio autovalori di $A$. Se hanno tutti parte reale $< 1$, il sistema è asintoticamente stabile. Se $=1$ semplicemente stabile.
 
 \subsubsection*{Linearizzazione}
 Scrivere equazione del sistema linearizzato attorno a un punto di equilibrio dato: $(\overline{x}, \overline{u})$\\
@@ -288,7 +290,8 @@ Serie: $G(s) = G_1(s)\cdot G_2(s)$\\
 Parallelo: $G(s) = G_1(s) + G_2(s)$\\
 Retroazione negativa: $G(s) = \frac{G_1(s)}{1 + G_1(s)G_2(s)}$\\
 Retroazione positiva: $G(s) = \frac{G_1(s)}{1 - G_1(s)G_2(s)}$\\
-Per lo studio di stabilità, si possono ignorare i blocchi in retroazione.
+Per lo studio di stabilità, si possono ignorare i blocchi in retroazione.\\
+Se $\omega \gg  0.1$ allora retroazione diventa serie.
 
 \section*{Andamento qualitativo}
 Data una funzione di trasferimento $G(s)$\\
@@ -402,7 +405,7 @@ Ogni specifica mi da un vincolo su $G(s)$.
 	\item Attenuazione ampiezza $n(t) = sin(\omega_n\cdot t)$ inferiore a $-15 dB$.\\
 		$|L(j\omega)| < -15 dB$.
 	\item Attenuazione ampiezza $d(t) = sin(\omega_d\cdot t)$ inferiore a $-15 dB$.\\
-		$|L(j\omega)| > 15 dB$.
+		$|L(j\omega)| > 15 dB$. NB cambia il segno.
 	\item Banda passante in anello chiuso $B > 10 rad/s$.\\
 		$\omega_c > 10$.
 	\item Ampiezza segnale $y(t)$ a fronte di ingressi $d(t) = 5sin(\omega_d \cdot t)$ inferiore a $0.1$.\\
